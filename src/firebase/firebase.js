@@ -31,5 +31,3 @@ export function useAuth() {
   
     return { user, isLogin, signIn, signOut }
 }
-
-asadssad
