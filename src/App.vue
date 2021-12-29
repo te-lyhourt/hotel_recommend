@@ -1,27 +1,13 @@
 <template>
   <div id="app">
-    {{firebaseData}}
+    <router-view></router-view>
   </div>
 </template>
 
-<script>
-  import {db} from './firebase/firebase';
-  const documentPath = 'contacts/jeff';
-
-  export default{
-    data(){
-      return{
-        firebaseData:null,
-      }
-    },
-    firestore(){
-      return{
-        firebaseData: db.doc(documentPath)
-      }
-    },
-  }
-</script>
-
 <style>
-
+#app {
+  font-family: 'Roboto', sans - serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 </style>
