@@ -1,15 +1,15 @@
 <template>
     <div>
-        <button @click="signIn" type="button">
-            login
-        </button>
+        <topbar></topbar>
     </div>
 </template>
 
 <script>
 import useAuth from '../firebase/auth'
 import {auth} from '../firebase/config'
+import topbar from './components/topbar.vue'
 export default {
+    components: { topbar },
     setup() {
         
     },
