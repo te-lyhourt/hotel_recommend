@@ -9,7 +9,7 @@
     <div class="mt-5">
       <div class="row">
         <!-- room types -->
-        <div class="col-12 col-sm-12 col-md-11 col-lg-4 col-xl-4 room-type-col">
+        <div class="col-12 col-sm-12 col-md-11 col-lg-4 col-xl-4 mx-auto">
           <div class="card px-4 py-4 room-type-card">
             <div class="text-center">
               <span class="text-14"> Room Types </span>
@@ -67,20 +67,20 @@
         <!-- end room types -->
 
         <!-- images -->
-        <div class="col-12 col-sm-12 col-md-11 col-lg-8 col-xl-8 mx-auto">
+        <div class="col-12 col-sm-12 col-md-11 col-lg-8 col-xl-8 mx-auto" :class="{'mt-4': imageMargin}">
           <div class="row">
             <div class="col-12 col-sm-12 col-md-9 col-lg-9 col-xl-9">
-              <img :src="hotel1" style="width: 100%; height: 357px; padding: 0" alt="" />
+              <img :src="hotel1" style="width: 100%; padding: 0" alt="" />
             </div>
             <div class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
               <div class="my-1">
-                <img :src="hotel1" style="width: 100%; padding: 0; height: 115px;" alt="" />
+                <img :src="hotel1" style="width: 100%; padding: 0;" alt="" />
               </div>
               <div class="my-1">
-                <img :src="hotel1" style="width: 100%; padding: 0; height: 115px;" alt="" />
-              </div>
+                <img :src="hotel1" style="width: 100%; padding: 0;" alt="" />
+              </div>  
               <div class="my-1">
-                <img :src="hotel1" style="width: 100%; padding: 0; height: 115px;" alt="" />
+                <img :src="hotel1" style="width: 100%; padding: 0;" alt="" />
               </div>
             </div>
           </div>  
@@ -95,9 +95,20 @@
 <script>
 export default {
   name: 'DetailPage',
+
   data: () => ({
     hotel1: require('../assets/detail_page/hotel_1.png'),
+    imageMargin: null
   }),
+
+  created () {
+    window.addEventListener('resize', () => {
+      console.log(window.innerWidth)
+      if (window.innerWidth < 992) this.imageMargin = true
+      else this.imageMargin = false
+    })
+  }
+
 }
 </script>
 
