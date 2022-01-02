@@ -67,28 +67,156 @@
         <!-- end room types -->
 
         <!-- images -->
-        <div class="col-12 col-sm-12 col-md-11 col-lg-8 col-xl-8 mx-auto" :class="{'mt-4': imageMargin}">
+        <div class="col-12 col-sm-12 col-md-11 col-lg-8 col-xl-8 mx-auto" :class="{ 'mt-4': imageMargin }">
           <div class="row">
             <div class="col-12 col-sm-12 col-md-9 col-lg-9 col-xl-9">
               <img :src="hotel1" style="width: 100%; padding: 0" alt="" />
             </div>
             <div class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
               <div class="my-1">
-                <img :src="hotel1" style="width: 100%; padding: 0;" alt="" />
+                <img :src="hotel1" style="width: 100%; padding: 0" alt="" />
               </div>
               <div class="my-1">
-                <img :src="hotel1" style="width: 100%; padding: 0;" alt="" />
-              </div>  
+                <img :src="hotel1" style="width: 100%; padding: 0" alt="" />
+              </div>
               <div class="my-1">
-                <img :src="hotel1" style="width: 100%; padding: 0;" alt="" />
+                <img :src="hotel1" style="width: 100%; padding: 0" alt="" />
               </div>
             </div>
-          </div>  
+          </div>
         </div>
         <!-- end images -->
+      </div>
+    </div>
+
+    <!-- services -->
+    <div id="services" class="mt-5 room-type-card card px-4 py-4">
+      <div class="text-center">
+        <span class="text-14"> Services </span>
+      </div>
+
+      <hr style="height: 2px" />
+
+      <div class="row">
+        <div class="col-2 mx-auto">
+          <div class="text-center">
+            <img :src="wifiImage" alt="wifi" style="width: 41px; height: 33px" />
+            <div class="text-center mt-3">
+              <span class="text-14">Free Wifi</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-2 mx-auto">
+          <div class="text-center">
+            <img :src="parkingImage" alt="wifi" style="width: 41px; height: 33px" />
+            <div class="text-center mt-3">
+              <span class="text-14">Parking</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-2 mx-auto">
+          <div class="text-center">
+            <img :src="spaImage" alt="wifi" style="width: 41px; height: 33px" />
+            <div class="text-center mt-3">
+              <span class="text-14">Spa</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-2 mx-auto">
+          <div class="text-center">
+            <img :src="swimImage" alt="wifi" style="width: 41px; height: 33px" />
+            <div class="text-center mt-3">
+              <span class="text-14">Swiming Pool</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-2 mx-auto">
+          <div class="text-center">
+            <img :src="foodImage" alt="wifi" style="width: 41px; height: 33px" />
+            <div class="text-center mt-3">
+              <span class="text-14">Food</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-2 mx-auto">
+          <div class="text-center">
+            <img :src="gymImage" alt="wifi" style="width: 41px; height: 33px" />
+            <div class="text-center mt-3">
+              <span class="text-14">Gym</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end services -->
+
+    <!-- About -->
+    <div id="services" class="mt-3 room-type-card card px-4 py-4">
+      <div class="text-left">
+        <span class="text-24"> About </span>
+      </div>
+
+      <hr style="height: 2px" />
+
+      <div>
+        <span class="text-14">
+          type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap
+          into electronic typesetting, remontent of a page when looking at its layout. The point of using Lorem Ipsum is
+          that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here',
+          making it look like readable English. Many desktop publishing packages and web page editors now use Lorem
+          Ipsum as their default model text, and a search for 'lo
+        </span>
+      </div>
+    </div>
+    <!-- end about -->
+
+    <!-- Contact & location -->
+    <div id="contactandlocation" class="mt-3">
+      <div class="row">
+        <div class="col-12 col-sm-12 col-md-11 col-lg-7 col-xl-7 mx-auto">
+          <div class="card room-type-card px-4 py-4" style="height: 400px;">
+            <div class="text-left">
+              <span class="text-24"> Contact Information </span>
+            </div>
+
+            <hr style="height: 2px" />
+
+            <div class="my-2">
+              <span class="text-14">Address: 3 No , 270 streets, Siem Reab , Cambodia</span>
+            </div>
+            <div class="my-2">
+              <span class="text-14">Phone: 09292929211111</span>
+            </div>
+            <div class="my-2">
+              <span class="text-14">website : abc.com</span>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="col-12 col-sm-12 col-md-11 col-lg-5 col-xl-5">
+          <div class="card room-type-card px-4 py-4" style="height: 400px;">
+            <div class="text-left">
+              <span class="text-24"> Location </span>              
+            </div>
+
+            <hr style="height: 2px" />
+
+            <div>
+              <img :src="mapImage" alt="map" style="width: 100%">
+            </div>
+
+          </div>
+        </div>
 
       </div>
     </div>
+    <!-- end contact & location -->
   </div>
 </template>
 
@@ -98,17 +226,22 @@ export default {
 
   data: () => ({
     hotel1: require('../assets/detail_page/hotel_1.png'),
-    imageMargin: null
+    wifiImage: require('../assets/detail_page/wifi.png'),
+    parkingImage: require('../assets/detail_page/parking.png'),
+    spaImage: require('../assets/detail_page/spa.png'),
+    swimImage: require('../assets/detail_page/swim.png'),
+    foodImage: require('../assets/detail_page/food.png'),
+    gymImage: require('../assets/detail_page/gym.png'),
+    mapImage: require('../assets/detail_page/map.png'),
+    imageMargin: null,
   }),
 
-  created () {
+  created() {
     window.addEventListener('resize', () => {
-      console.log(window.innerWidth)
       if (window.innerWidth < 992) this.imageMargin = true
       else this.imageMargin = false
     })
-  }
-
+  },
 }
 </script>
 
@@ -121,6 +254,12 @@ export default {
 .text-14 {
   font-family: 'Roboto', sans-serif;
   font-size: 16px;
+  font-weight: bold;
+  font-style: italic;
+}
+.text-24 {
+  font-family: 'Roboto', sans-serif;
+  font-size: 22px;
   font-weight: bold;
   font-style: italic;
 }
