@@ -178,8 +178,8 @@
     <!-- Contact & location -->
     <div id="contactandlocation" class="mt-3">
       <div class="row">
-        <div class="col-12 col-sm-12 col-md-11 col-lg-7 col-xl-7 mx-auto">
-          <div class="card room-type-card px-4 py-4" style="height: 400px;">
+        <div class="col-12 col-sm-12 col-md-11 col-lg-7 col-xl-7 mx-auto mt-2">
+          <div class="card room-type-card px-4 py-4" style="height: 400px">
             <div class="text-left">
               <span class="text-24"> Contact Information </span>
             </div>
@@ -195,28 +195,158 @@
             <div class="my-2">
               <span class="text-14">website : abc.com</span>
             </div>
-
           </div>
         </div>
 
-        <div class="col-12 col-sm-12 col-md-11 col-lg-5 col-xl-5">
-          <div class="card room-type-card px-4 py-4" style="height: 400px;">
+        <div class="col-12 col-sm-12 col-md-11 col-lg-5 col-xl-5 mx-auto mt-2">
+          <div class="card room-type-card px-4 py-4" style="height: 400px">
             <div class="text-left">
-              <span class="text-24"> Location </span>              
+              <span class="text-24"> Location </span>
             </div>
 
             <hr style="height: 2px" />
 
             <div>
-              <img :src="mapImage" alt="map" style="width: 100%">
+              <img :src="mapImage" alt="map" style="width: 100% max-height: 450px;" />
             </div>
-
           </div>
         </div>
-
       </div>
     </div>
     <!-- end contact & location -->
+
+    <!-- rates & reviews -->
+    <div class="mt-3">
+      <div class="row">
+        <div class="col-12 col-sm-12 col-md-11 col-lg-4 col-xl-4 mx-auto">
+          <div class="card room-type-card px-4 py-4">
+            <div class="text-left">
+              <span class="text-24"> Rates and Reviews </span>
+            </div>
+            <hr style="height: 2px" />
+
+            <div>
+              <div class="row">
+                <div class="col-3 mx-auto">
+                  <span class="text-14">5 stars</span>
+                </div>
+                <div class="col-6 mt-1">
+                  <div class="progress">
+                    <div
+                      class="progress-bar"
+                      role="progressbar"
+                      style="width: 65%"
+                      aria-valuenow="25"
+                      aria-valuemin="0"
+                      aria-valuemax="100"
+                    ></div>
+                  </div>
+                </div>
+                <div class="col-3 mx-auto">
+                  <div>
+                    <span class="text-14">284</span>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-3 mx-auto">
+                  <span class="text-14">5 stars</span>
+                </div>
+                <div class="col-6 mt-1">
+                  <div class="progress">
+                    <div
+                      class="progress-bar"
+                      role="progressbar"
+                      style="width: 65%"
+                      aria-valuenow="25"
+                      aria-valuemin="0"
+                      aria-valuemax="100"
+                    ></div>
+                  </div>
+                </div>
+                <div class="col-3 mx-auto">
+                  <div>
+                    <span class="text-14">284</span>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-3 mx-auto">
+                  <span class="text-14">5 stars</span>
+                </div>
+                <div class="col-6 mt-1">
+                  <div class="progress">
+                    <div
+                      class="progress-bar"
+                      role="progressbar"
+                      style="width: 65%"
+                      aria-valuenow="25"
+                      aria-valuemin="0"
+                      aria-valuemax="100"
+                    ></div>
+                  </div>
+                </div>
+                <div class="col-3 mx-auto">
+                  <div>
+                    <span class="text-14">284</span>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-3 mx-auto">
+                  <span class="text-14">5 stars</span>
+                </div>
+                <div class="col-6 mt-1">
+                  <div class="progress">
+                    <div
+                      class="progress-bar"
+                      role="progressbar"
+                      style="width: 65%"
+                      aria-valuenow="25"
+                      aria-valuemin="0"
+                      aria-valuemax="100"
+                    ></div>
+                  </div>
+                </div>
+                <div class="col-3 mx-auto">
+                  <div>
+                    <span class="text-14">284</span>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-3 mx-auto">
+                  <span class="text-14">5 stars</span>
+                </div>
+                <div class="col-6 mt-1">
+                  <div class="progress">
+                    <div
+                      class="progress-bar"
+                      role="progressbar"
+                      style="width: 65%"
+                      aria-valuenow="25"
+                      aria-valuemin="0"
+                      aria-valuemax="100"
+                    ></div>
+                  </div>
+                </div>
+                <div class="col-3 mx-auto">
+                  <div>
+                    <span class="text-14">284</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-12 col-sm-12 col-md-11 col-lg-8 col-xl-8">
+
+        </div>
+        <div></div>
+      </div>
+    </div>
+    <!-- end rates & reviews -->
   </div>
 </template>
 
