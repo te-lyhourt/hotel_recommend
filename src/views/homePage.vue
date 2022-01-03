@@ -3,6 +3,9 @@
         <button @click="signIn" type="button">
             login
         </button>
+        <button @click="signout" type="button">
+            signout
+        </button>
     </div>
 </template>
 
@@ -15,13 +18,16 @@ export default {
     },
     methods:{
         signIn(){
-            useAuth()
+            useAuth('login')
+        },
+        signout(){
+            useAuth('signout')
         }
     },
     mounted(){
         setTimeout(()=>{
             console.log(auth.currentUser);
-        },5000)
+        },2000)
         
     }
 }
