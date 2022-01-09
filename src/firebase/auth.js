@@ -2,7 +2,7 @@
 import { auth } from './config'
 import { signInWithPopup, GoogleAuthProvider, signOut } from "firebase/auth";
 
-export default function useAuth(type) {
+export default function useAuth(type,data) {
     if(type=='login'){
         const provider = new GoogleAuthProvider()
         signInWithPopup(auth,provider).then(result=>{
@@ -21,6 +21,18 @@ export default function useAuth(type) {
             const credential = GoogleAuthProvider.credentialFromError(error);
             console.log(errorCode,errorMessage,email,credential);
         })
+    }
+    // else if(type=='login'){
+    //     signInWithEmailAndPassword(auth,data.email, data.password).then(res=>{
+    //         console.log(res);
+    //     })
+    // }
+    else if(type=='loginAdmin'){
+        if(data.email=="admin@admin.com"){
+            if(data.password=="admin12345"){
+                return true
+            }
+        }
     }
     else if(type=='signout'){
         signOut(auth).then(()=>{

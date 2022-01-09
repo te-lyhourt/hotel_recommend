@@ -1,27 +1,27 @@
 <template>
     <div>
-        <button @click="signIn" type="button">
-            login
-        </button>
-        <button @click="signout" type="button">
-            signout
-        </button>
+        <topbar></topbar>
     </div>
 </template>
 
 <script>
 import useAuth from '../firebase/auth'
 import {auth} from '../firebase/config'
+import topbar from './components/topbar.vue'
 export default {
+    components: { topbar },
     setup() {
         
     },
     methods:{
-        signIn(){
-            useAuth('login')
-        },
+        // signUp(){
+        //     useAuth('signup')
+        // },
         signout(){
             useAuth('signout')
+        },
+        login(){
+            useAuth('login')
         }
     },
     mounted(){
