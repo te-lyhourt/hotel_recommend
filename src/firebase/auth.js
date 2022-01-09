@@ -18,7 +18,9 @@ export default async function userAuth(type,data) {
     // }
     else if(type=='loginAdmin'){
         let userAdmin = await signInWithEmailAndPassword(auth,data.email,data.password)
-        return userAdmin.user
+        if(userAdmin.user){
+            return true
+        }
         // if(data.email=="admin@admin.com"){
         //     if(data.password=="admin12345"){
         //         return true
