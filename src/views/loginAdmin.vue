@@ -15,7 +15,9 @@
                     <input type="checkbox" class="form-check-input" id="exampleCheck1">
                     <label class="form-check-label" for="exampleCheck1">Check me out</label>
                 </div>
+                <input @change="uploadImg" type="file" name="" id="" multiple>
                 <button @click="loginAdmin" type="button" class="btn btn-primary">Submit</button>
+                
             </form>
         </div>
     </div>
@@ -23,7 +25,8 @@
 </template>
 
 <script>
-import useAuth from '../firebase/auth'
+import userAuth from '../firebase/auth'
+import uploadImgs from '../firebase/uploadImg'
 export default {
     data(){
         return{
@@ -37,11 +40,14 @@ export default {
         
     },
     methods:{
-        loginAdmin(){
-            let accept = useAuth('loginAdmin',this.form)
-            if(accept){
-                this.$router.push('/admin/dashboard')
-            }
+        async loginAdmin(){
+            let admin = await userAuth('loginAdmin',this.form)
+            console.log(admin);
+            
+        },
+        uploadImg(e){
+            console.log(e.target.files);
+            uploadImgs(e.target.files)
         }   
     }
 }

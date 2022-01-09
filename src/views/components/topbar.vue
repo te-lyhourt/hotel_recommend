@@ -11,9 +11,15 @@
 </template>
 <script>
 import logo from "./logo.vue";
-
+import userAuth from '../../firebase/auth'
 export default {
   components: { logo },
+  methods:{
+    async signIn(){
+            let isLogin = await userAuth('login')
+            console.log(isLogin);
+        }
+  }
 };
 </script>
 <style scoped>
