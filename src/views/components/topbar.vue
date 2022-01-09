@@ -5,15 +5,38 @@
       <input type="text" class="search">
     </div>
     <div class="right">
-      <button @click="signIn" type="button">login</button>
+      <!-- <div v-if="isLogin" class="login">
+        <profile :src="user.photoURL" />
+        <button class="text-gray-400 hover:text-white" @click="signOut">
+          Sign Out
+        </button>
+      </div>
+
+      <button v-else @click="signIn">
+        Sign in
+      </button> -->
     </div>
+
+
+
   </div>
 </template>
 <script>
 import logo from "./logo.vue";
 
+// import Profile from './profile.vue';
+// export default {
+//   setup() {
+//     const { user, isLogin, signOut, signIn } = useAuth()
+//     return { user, isLogin, signOut, signIn }
+//   }
+// }
+
 export default {
-  components: { logo },
+  components: { 
+    logo ,
+    // Profile
+  },
 };
 </script>
 <style scoped>
