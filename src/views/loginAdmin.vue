@@ -45,9 +45,13 @@ export default {
             console.log(admin);
             
         },
-        uploadImg(e){
+        async uploadImg(e){
             console.log(e.target.files);
-            uploadImgs(e.target.files)
+            let urlImgs = await uploadImgs(e.target.files)
+            console.log(urlImgs);
+            
+            
+            
         }   
     }
 }
