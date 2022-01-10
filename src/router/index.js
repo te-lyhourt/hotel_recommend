@@ -3,6 +3,7 @@ import homePage from '../views/homePage'
 import DetailPage from '../views/DetailPage.vue'
 import loginAdmin from '../views/loginAdmin.vue'
 import adminPanel from '../views/adminPanel.vue'
+import createPage from '../views/createPage.vue'
 const routes=[
     {
         path:'/',
@@ -24,6 +25,11 @@ const routes=[
         path:'/admin/admin-panel',
         name:'adminPanel',
         component:adminPanel
+    },
+    {
+        path: '/create-page',
+        name: 'createPage',
+        component:createPage
     }
 ]
 

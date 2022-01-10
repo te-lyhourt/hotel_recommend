@@ -23,6 +23,7 @@
 </template>
 <script>
 import logo from "./logo.vue";
+
 // import Profile from './profile.vue';
 // export default {
 //   setup() {

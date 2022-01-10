@@ -17,6 +17,8 @@
                 </div>
                 <input @change="uploadImg" type="file" name="" id="" multiple>
                 <button @click="loginAdmin" type="button" class="btn btn-primary">Submit</button>
+                <button @click="deletedHotel" type="button" class="btn btn-primary">Delete</button>
+                <button @click="listOneHotel" type="button" class="btn btn-primary">ListOneHotel</button>
                 
             </form>
         </div>
@@ -28,6 +30,8 @@
 import userAuth from '../firebase/auth'
 import uploadImgs from '../firebase/uploadImg'
 import listHotel from '../firebase/listHotel'
+import deletedHotel from '../firebase/deletedHotel'
+import listOneHotelByID from '../firebase/listOneHotel'
 export default {
     data(){
         return{
@@ -50,7 +54,14 @@ export default {
             console.log(e.target.files);
             let urlImgs = await uploadImgs(e.target.files)
             console.log(urlImgs);
-        }   
+        },
+        deletedHotel(){
+            deletedHotel('x13EQ1Hg4GxBdMJvpaAk')
+        },
+        async listOneHotel(){
+            let isSuccess = await listOneHotelByID('x13EQ1Hg4GxBdMJvpaAk')
+            console.log(isSuccess);
+        }
     },
     async mounted(){
         let hotels = await listHotel()
