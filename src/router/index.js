@@ -1,11 +1,8 @@
 import {createRouter,createWebHistory} from 'vue-router'
 import homePage from '../views/homePage'
 import DetailPage from '../views/DetailPage.vue'
-<<<<<<< HEAD
-import CreatePage from '../views/createPage.vue'
-=======
 import loginAdmin from '../views/loginAdmin.vue'
->>>>>>> bef28ce2985bda87e013c9f30a0de9735c1935dd
+import createPage from '../views/createPage.vue'
 const routes=[
     {
         path:'/',
@@ -18,21 +15,17 @@ const routes=[
         name: 'DetailPage',
         component: DetailPage
     },
-<<<<<<< HEAD
-
-    {
-        path: '/create-page',
-        name: 'createPage',
-        component: CreatePage
-    },
-
-=======
     {
         path:'/admin/login',
         name:'loginAdmin',
         component:loginAdmin
+    },
+
+    {
+        path: '/create-page',
+        name: 'createPage',
+        component:createPage
     }
->>>>>>> bef28ce2985bda87e013c9f30a0de9735c1935dd
 ]
 
 const router = createRouter({

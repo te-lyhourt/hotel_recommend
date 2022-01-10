@@ -4,7 +4,6 @@
     <div class="container">
       <form action="/action_page.php">
         <h2 class="header">Create/Update Hotel Form</h2>
-        
         <div class="row">
           <div class="col-50">
             <label for="fname"> Hotel Name</label>
@@ -17,9 +16,12 @@
             <input type="text" id="city" name="city" style="background-color: #00ADB5;" placeholder="Siem Reap">
 
             <label for="city"> About</label>
-            <textarea id="w3review" name="w3review" rows="5" cols="70" style="background-color: #00ADB5;">
-              At w3schools.com you will learn how to make a website. They offer free tutorials in all web development technologies.
-            </textarea>
+            <div class="texarea1">
+               <textarea id="w3review" name="w3review" rows="5" cols="70">
+                At w3schools.com you will learn how to make a website. They offer free tutorials in all web development technologies.
+              </textarea>
+            </div>
+           
             <div style="width: 20%;">
               <button type="submit" class="btn btn-info" style="background-color: #00ADB5;">Clear</button>
             </div>
@@ -27,8 +29,8 @@
             <label for="">Room type</label>
 
             <div class="inline1">
-              <button type="button" class="btn btn-info" style="background-color: #00ADB5;">Bed</button>
-              <button type="button" class="btn btn-info" style="background-color: #00ADB5;">Price</button>
+              <button type="button" class="btn btn-info" style="background-color: #00ADB5;">Bed</button>&nbsp;
+              <button type="button" class="btn btn-info" style="background-color: #00ADB5;">Price</button>&nbsp;
               <button type="button" class="btn btn-info" style="background-color: #00ADB5;">Optional</button>
               &nbsp;
               <i class="fas fa-plus" style="font-size:24px"></i> &nbsp;
@@ -66,14 +68,27 @@
                 <div class="column1">
                   <i class="fas fa-wifi"></i>
                   <label for="">Free WIFI</label>
+                  <label class="container1">
+                    <input type="checkbox" checked="checked">
+                    <span class="checkmark"></span>
+                  </label>
                 </div>
+
                 <div class="column1">
                   <i class="fad fa-spa"></i>
                   <label for="">Spa</label>
+                  <label class="container1">
+                    <input type="checkbox" checked="checked">
+                    <span class="checkmark"></span>
+                  </label>
                 </div>
                 <div class="column1">
                   <i class="fas fa-utensils-alt"></i>
                   <label for="">Food</label>
+                  <label class="container1">
+                    <input type="checkbox" checked="checked">
+                    <span class="checkmark"></span>
+                  </label>
                 </div>
               </div>
               
@@ -81,30 +96,42 @@
                 <div class="column1">
                   <i class="far fa-parking"></i>
                   <label for="">Parking</label>
+                  <label class="container1">
+                    <input type="checkbox" checked="checked">
+                    <span class="checkmark"></span>
+                  </label>
                 </div>
                 <div class="column1">
                   <i class="far fa-swimmer"></i>
                   <label for="">Pool</label>
+                  <label class="container1">
+                    <input type="checkbox" checked="checked">
+                    <span class="checkmark"></span>
+                  </label>
                 </div>
                 <div class="column1">
                   <i class="fal fa-dumbbell"></i>
                   <label for="">Gym</label>
+                  <label class="container1">
+                    <input type="checkbox" checked="checked">
+                    <span class="checkmark"></span>
+                  </label>
                 </div>
             </div>
             
           </div>
-          
+        </div>  
         </div>
         
+         <div class="inline1">
+          <button type="submit" class="btn btn-info" style="background-color: #00ADB5;">Confirm</button>&nbsp;
+            <button type="submit" class="btn btn-info" style="background-color: #00ADB5;">Cancel</button>
+          </div>
       </form>
     </div>
-    
-    <div class="inline1">
-      <button type="submit" class="btn btn-info" style="background-color: #00ADB5;">Confirm</button>
-      <button type="submit" class="btn btn-info" style="background-color: #00ADB5;">Cancel</button>
-   </div>
 
 </div>
+
 </div>
 
 </template>
@@ -190,7 +217,7 @@ span.price {
 }
 .background1{
     background-color: #393E46;
-    padding-top: 20px;
+    padding: 20px;
 }
 .container{
   border-radius: 20px;
@@ -210,6 +237,10 @@ span.price {
   display: inline-block;
   width: 20%;
 }
+.textarea1{
+  background-color: #00ADB5;
+  /*color: white*/
+}
 .service1{
   border-radius: 20px;
   background-color: #00ADB5;
@@ -217,9 +248,10 @@ span.price {
 .column1 {
   float: left;
   width: 33.33%;
-  padding: 30px;
+  padding: 15px;
  /* height: 300px; /* Should be removed. Only for demonstration */
 }
+
 /* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other (also change the direction - make the "cart" column go on top) */
 @media (max-width: 800px) {
   .row {
@@ -230,5 +262,4 @@ span.price {
   }
 }
 
-@import'~bootstrap/dist/css/bootstrap.css'
 </style>
