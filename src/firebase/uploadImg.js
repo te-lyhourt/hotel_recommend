@@ -15,7 +15,6 @@ export default async function uploadImgs(files){
             return  resolve(getDownloadURL(uploadTask.snapshot.ref));
         }
         )))
-        
     }
     return urlImgs;
     

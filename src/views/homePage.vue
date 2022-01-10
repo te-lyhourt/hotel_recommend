@@ -1,19 +1,22 @@
 <template>
     <div>
         <topbar></topbar>
-        <div class="mt-5">
-            <button @click="signout" class="btn btn-primary" type="button">signout</button>
-        </div>
-        asdasdqwe
+        <sidebar></sidebar>
     </div>
 </template>
 
 <script>
 import userAuth from '../firebase/auth'
 import {auth} from '../firebase/config'
+import Sidebar from './components/sidebar.vue'
 import topbar from './components/topbar.vue'
 export default {
-    components: { topbar },
+    data(){
+        return{
+            isLogin:false
+        }
+    },
+    components: { topbar, Sidebar },
     setup() {
         
     },
@@ -25,6 +28,9 @@ export default {
             let isSignout = await userAuth('signout')
             console.log(isSignout);
         },
+        async signin(){
+            this.isLogin = await userAuth('login')
+        }
     },
     mounted(){
         setTimeout(()=>{

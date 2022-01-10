@@ -27,6 +27,7 @@
 <script>
 import userAuth from '../firebase/auth'
 import uploadImgs from '../firebase/uploadImg'
+import listHotel from '../firebase/listHotel'
 export default {
     data(){
         return{
@@ -49,10 +50,11 @@ export default {
             console.log(e.target.files);
             let urlImgs = await uploadImgs(e.target.files)
             console.log(urlImgs);
-            
-            
-            
         }   
+    },
+    async mounted(){
+        let hotels = await listHotel()
+        console.log(hotels);
     }
 }
 </script>
