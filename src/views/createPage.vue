@@ -1,0 +1,234 @@
+<template>
+<div>
+  <div class="background1">
+    <div class="container">
+      <form action="/action_page.php">
+        <h2 class="header">Create/Update Hotel Form</h2>
+        
+        <div class="row">
+          <div class="col-50">
+            <label for="fname"> Hotel Name</label>
+            <input type="text" id="fname" name="firstname" style="background-color: #00ADB5;" placeholder="Example hotel name">
+            <label for="email"> Date of birth</label>
+            <input type="text" id="email" name="email" style="background-color: #00ADB5;" placeholder="01/01/2011">
+            <label for="adr"> Website</label>
+            <input type="text" id="adr" name="address" style="background-color: #00ADB5;" placeholder="www.example-hotel.com">
+            <label for="city"> Province</label>
+            <input type="text" id="city" name="city" style="background-color: #00ADB5;" placeholder="Siem Reap">
+
+            <label for="city"> About</label>
+            <textarea id="w3review" name="w3review" rows="5" cols="70" style="background-color: #00ADB5;">
+              At w3schools.com you will learn how to make a website. They offer free tutorials in all web development technologies.
+            </textarea>
+            <div style="width: 20%;">
+              <button type="submit" class="btn btn-info" style="background-color: #00ADB5;">Clear</button>
+            </div>
+
+            <label for="">Room type</label>
+
+            <div class="inline1">
+              <button type="button" class="btn btn-info" style="background-color: #00ADB5;">Bed</button>
+              <button type="button" class="btn btn-info" style="background-color: #00ADB5;">Price</button>
+              <button type="button" class="btn btn-info" style="background-color: #00ADB5;">Optional</button>
+              &nbsp;
+              <i class="fas fa-plus" style="font-size:24px"></i> &nbsp;
+              <i class="fas fa-times" style="font-size:24px"></i>
+           </div>
+          </div>
+
+          <div class="col-50">
+            <label for="cname">Location</label>
+            <input type="text" id="cname" name="cardname" style="background-color: #00ADB5;" placeholder="Siem Reap/Cambodia">
+            <label for="ccnum">Contact</label>
+            <input type="text" id="ccnum" name="cardnumber" style="background-color: #00ADB5;" placeholder="+855 11 22 33 44">
+            <label for="expmonth">Email</label>
+            <input type="text" id="expmonth" name="expmonth" style="background-color: #00ADB5;" placeholder="hotel@gmail.com">
+            <br>
+            <label for="cname">Star</label>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star"></span>
+            <span class="fa fa-star"></span>
+            <br><br>
+            <label for="cname">Images</label>
+            <input type="file" id="img" name="img" accept="image/*">
+
+            <br><br><br><br><br>
+
+            <div style="width: 20%;">
+              <button type="submit" class="btn btn-info" style="background-color: #00ADB5;">Add</button>
+            </div>
+           
+            <label for="">Service</label>
+            <div class="service1">
+              <div class="row" style="text-align: center;">
+                <div class="column1">
+                  <i class="fas fa-wifi"></i>
+                  <label for="">Free WIFI</label>
+                </div>
+                <div class="column1">
+                  <i class="fad fa-spa"></i>
+                  <label for="">Spa</label>
+                </div>
+                <div class="column1">
+                  <i class="fas fa-utensils-alt"></i>
+                  <label for="">Food</label>
+                </div>
+              </div>
+              
+              <div class="row" style="text-align: center;">
+                <div class="column1">
+                  <i class="far fa-parking"></i>
+                  <label for="">Parking</label>
+                </div>
+                <div class="column1">
+                  <i class="far fa-swimmer"></i>
+                  <label for="">Pool</label>
+                </div>
+                <div class="column1">
+                  <i class="fal fa-dumbbell"></i>
+                  <label for="">Gym</label>
+                </div>
+            </div>
+            
+          </div>
+          
+        </div>
+        
+      </form>
+    </div>
+    
+    <div class="inline1">
+      <button type="submit" class="btn btn-info" style="background-color: #00ADB5;">Confirm</button>
+      <button type="submit" class="btn btn-info" style="background-color: #00ADB5;">Cancel</button>
+   </div>
+
+</div>
+</div>
+
+</template>
+
+<script>
+
+export default {
+  name: 'DetailPage',
+  data: () => ({
+   
+  })
+}
+</script>
+
+<style scoped>
+body {
+  font-family: Arial;
+  overflow-x: hidden;
+
+}
+.row {
+  display: -ms-flexbox; /* IE10 */
+  display: flex;
+  -ms-flex-wrap: wrap; 
+  flex-wrap: wrap;
+}
+.col-50 {
+  -ms-flex: 50%; 
+  flex: 50%;
+}
+.col-75 {
+  -ms-flex: 75%; 
+  flex: 75%;
+}
+.col-25,
+.col-50 {
+  padding: 0 16px;
+  color: white;
+}
+input[type=text] {
+  width: 100%;
+  margin-bottom: 5px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+label {
+  margin-bottom: 10px;
+  display: block;
+}
+.icon-container {
+  margin-bottom: 20px;
+  padding: 7px 0;
+  font-size: 24px;
+}
+.btn {
+  background-color: #04AA6D;
+  color: white;
+  padding: 12px;
+  margin: 10px 0;
+  border: none;
+  width: 100%;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 17px;
+}
+.btn:hover {
+  background-color: #45a049;
+}
+a {
+  color: #2196F3;
+}
+hr {
+  border: 1px solid lightgrey;
+}
+span.price {
+  float: right;
+  color: grey;
+}
+.header{
+    text-align: center;
+    color: white;
+}
+.background1{
+    background-color: #393E46;
+    padding-top: 20px;
+}
+.container{
+  border-radius: 20px;
+  background-color: #222831;
+}
+
+.checked {
+  color: #00ADB5;
+}
+
+.inline {
+  display: inline-block; 
+  margin-left: 50px;
+  margin-top: 20px;
+}
+.inline1 button{
+  display: inline-block;
+  width: 20%;
+}
+.service1{
+  border-radius: 20px;
+  background-color: #00ADB5;
+}
+.column1 {
+  float: left;
+  width: 33.33%;
+  padding: 30px;
+ /* height: 300px; /* Should be removed. Only for demonstration */
+}
+/* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other (also change the direction - make the "cart" column go on top) */
+@media (max-width: 800px) {
+  .row {
+    flex-direction: column-reverse;
+  }
+  .col-25 {
+    margin-bottom: 20px;
+  }
+}
+
+@import'~bootstrap/dist/css/bootstrap.css'
+</style>
