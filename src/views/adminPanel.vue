@@ -1,7 +1,7 @@
 <template>
 
     <body>
-        <nav class="navbar">
+        <!-- <nav class="navbar">
             <div class="container">
                 <div class="navbar-header">
                     <button class="navbar-toggler" data-toggle="open-navbar1">
@@ -46,7 +46,7 @@
                     </ul>
                 </div>
             </div>
-        </nav>
+        </nav> -->
 
         <div class="container-fluid" style="padding: 0 5rem">
             <div style="padding-bottom: 1.5rem">
@@ -55,14 +55,14 @@
                 <button type="button" class="btn btn-primary pull-right"> <i class="fas fa-calendar-day"></i>  Date</button>
             </div>
 
-            <table class="table table-dark">
-                <thead>
+            <table class="table table-dark" >
+                <thead style="width: 100%">
                     <tr>
-                        <th>Hotel Name</th>
-                        <th>Price</th>
-                        <th>Locations</th>
-                        <th>Rating</th>
-                        <th>Action</th>
+                        <td>Hotel Name</td>
+                        <td>Price</td>
+                        <td>Locations</td>
+                        <td>Rating</td>
+                        <td style="width: 20rem">Action</td>
                     </tr>
                 </thead>
                 <tbody>
