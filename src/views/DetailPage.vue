@@ -339,9 +339,29 @@
             </div>
           </div>
         </div>
-        
-        <div class="col-12 col-sm-12 col-md-11 col-lg-8 col-xl-8">
 
+        <div class="col-12 col-sm-12 col-md-11 col-lg-8 col-xl-8">
+          <div class="card room-type-card px-4 py-4">
+            <div class="row">
+              <div class="col-1">
+                <img :src="wifiImage" alt="..." class="rounded-circle" style="width: 55px" />
+              </div>
+              <div class="col-11">
+                <textarea
+                  class="form-control"
+                  aria-label="Comment"
+                  placeholder="Comment ..."
+                  style="border-radius: 10px; color: white; background-color:#00ADB5; border: none"
+                  rows="3"
+                ></textarea>
+                <div class="mt-3">
+                  <button class="btn mr-4 btn-sm" style="color: white; background-color:#00ADB5; border-radius: 10px">Send</button>
+                  <button class="btn ml-1 btn-sm" style="color: white; background-color:#00ADB5; border-radius: 10px">Clear</button>
+                </div>
+                <hr style="height: 2px" />
+              </div>
+            </div>
+          </div>
         </div>
         <div></div>
       </div>
