@@ -1,9 +1,9 @@
 import { getStorage, ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
-export default async function uploadImgs(files){
+export default async function uploadImgs(hotelName,files){
     let urlImgs=[]
     for(let i=0;i<files.length;i++){
         let storage = getStorage();
-        let storageRef = ref(storage,'images/'+files[i].name);
+        let storageRef = ref(storage,'images/'+hotelName+'/'+files[i].name);
         let uploadTask = uploadBytesResumable(storageRef,files[i]);
         urlImgs.push(await new Promise(resolve=> uploadTask.on('state-change',()=>{
             
