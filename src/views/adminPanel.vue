@@ -1,7 +1,7 @@
 <template>
 
     <body>
-        <!-- <nav class="navbar">
+        <nav class="navbar">
             <div class="container">
                 <div class="navbar-header">
                     <button class="navbar-toggler" data-toggle="open-navbar1">
@@ -46,7 +46,7 @@
                     </ul>
                 </div>
             </div>
-        </nav> -->
+        </nav>
 
         <div class="container-fluid" style="padding: 0 5rem">
             <div style="padding-bottom: 1.5rem">
@@ -106,9 +106,7 @@
                     </tr>
 
                 </tbody>
-
             </table>
-
 
             <nav aria-label="Page navigation example">
                 <ul class="pagination justify-content-end pull-right">
