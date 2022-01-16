@@ -1,13 +1,14 @@
 <template>
 <div>
+  
   <div class="background1">
     <div class="container">
-      <form ref="addHotel" id="formHotel">
+      <form id="formHotel">
         <h2 class="header">Create/Update Hotel Form</h2>
         <div class="row">
           <div class="col-50">
             <label for="fname"> Hotel Name</label>
-            <input v-model="form.hotelName" type="text" id="fname" name="firstname"  placeholder="Example hotel name">
+            <input v-model="form.hotelName" type="text" id="fname" name="fname"  placeholder="Example hotel name">
             <label for="DOB"> Date of Build</label>
             <input v-model="form.dateOfBuild" type="date" id="DOB" class="w-100 p-3 mb-2" name="DOB" style="background-color: #00ADB5;">
             <label for="website"> Website</label>
@@ -75,7 +76,7 @@
             <label for="cname">Location</label>
             <input v-model="form.location" type="text" id="cname" name="location" style="background-color: #00ADB5;" placeholder="Link">
             <label for="ccnum">Contact</label>
-            <input v-model="form.contact" type="text" class="p-3" id="ccnum" name="contact" style="background-color: #00ADB5;" placeholder="+855 11 22 33 44">
+            <input v-model="form.contact" type="text" class="p-3" id="ccnum" name="contact" style="background-color: #00ADB5;" placeholder="+855">
             <label for="expmonth">Email</label>
             <input v-model="form.email" type="text" class="p-3" id="expmonth" name="email" style="background-color: #00ADB5;" placeholder="hotel@gmail.com">
             <br>
@@ -165,10 +166,11 @@
             <!-- <button type="button" class="btn btn-info" style="background-color: #00ADB5;">Cancel</button> -->
           </div>
       </form>
+      <modelPopUp :message="isSuccess"></modelPopUp>
+
     </div>
-
-</div>
-
+  </div>
+  
 </div>
 
 </template>
@@ -176,10 +178,14 @@
 <script>
 import uploadImgs from '../firebase/uploadImg'
 import modelHotel from '../firebase/form'
+import modelPopUp from './components/modalPopUp.vue'
+import {Modal} from 'bootstrap'
+import resetData from '../firebase/resetForm'
 export default {
     data(){
       return{
         roomType:1,
+        isSuccess:null,
         form:{
             hotelName: null ,
             location: null ,
@@ -203,9 +209,13 @@ export default {
         },
       }
     },
+    components:{modelPopUp},
     methods:{
       addMoreRoom(){
         this.roomType++
+        const modal = new Modal(document.getElementById('alertModal'))
+        console.log(modal);
+        modal.show()
       },
       deletedRoom(){
         this.roomType--
@@ -226,18 +236,26 @@ export default {
           }
           this.form.roomTypes.push(objectRoom)
         }
-        this.form.urlImages = await uploadImgs(this.form.urlImages)
+        this.form.urlImages = await uploadImgs(this.form.hotelName,this.form.urlImages)
         if(this.form.urlImages.length>0&&this.form.roomTypes.length>0){
-            
-            let isSuccess = modelHotel(this.form)
-            console.log(isSuccess);
-            if(isSuccess){
-              document.getElementById('formHotel').reset()
-              // setTimeout(() => {
-              
-              // }, 3000);
+            this.isSuccess = modelHotel(this.form)
+            if(this.isSuccess){
+              const modal = new Modal(document.getElementById('alertModal'))
+              modal.show()
+              this.form = resetData()
+              document.getElementById('img').value=null
+              this.roomType=1
+              document.getElementById('Bed1').value=null
+              document.getElementById('Price1').value=null
+              document.getElementById('Optional1').value=null
+              setTimeout(() => {
+                modal.hide()
+              }, 3000);
             }
             
+        }
+        else{
+          alert('At least one room types!')
         }
       }
     }

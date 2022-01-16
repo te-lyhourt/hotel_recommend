@@ -27,7 +27,7 @@ const routes=[
         component:adminPanel
     },
     {
-        path: '/create-page',
+        path: '/admin/create-hotel',
         name: 'createPage',
         component:createPage
     }
