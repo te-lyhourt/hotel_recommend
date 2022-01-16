@@ -2,19 +2,19 @@
 <div>
   <div class="background1">
     <div class="container">
-      <form>
+      <form ref="addHotel" id="formHotel">
         <h2 class="header">Create/Update Hotel Form</h2>
         <div class="row">
           <div class="col-50">
             <label for="fname"> Hotel Name</label>
-            <input type="text" id="fname" name="firstname"  placeholder="Example hotel name">
-            <label for="email"> Date of birth</label>
-            <input type="date" id="email" class="w-100 p-3 mb-2" name="email" style="background-color: #00ADB5;">
-            <label for="adr"> Website</label>
-            <input type="text" id="adr" name="address"  placeholder="www.example-hotel.com">
-            <label for="city"> Province</label>
-            <select name="province" class="w-100 p-3 mb-2" style="background-color: #00ADB5;">
-              <option value="">All</option>
+            <input v-model="form.hotelName" type="text" id="fname" name="firstname"  placeholder="Example hotel name">
+            <label for="DOB"> Date of Build</label>
+            <input v-model="form.dateOfBuild" type="date" id="DOB" class="w-100 p-3 mb-2" name="DOB" style="background-color: #00ADB5;">
+            <label for="website"> Website</label>
+            <input v-model="form.website" type="text" id="website" name="website"  placeholder="www.example-hotel.com">
+            <label for="province"> Province</label>
+            <select v-model="form.province" name="province" id="province" class="w-100 p-3 mb-2">
+              <option value="" hidden>Selected Province</option>
               <option value="01">Banteay Meanchey</option>
               <option value="02">Battambang</option>
               <option value="03">Kampong Cham</option>
@@ -44,40 +44,43 @@
 
             <label> About</label>
             
-            <textarea class="p-3 w-100" rows="5"  placeholder="About Hotel" style="background-color: #00ADB5;"></textarea>
-            
-            <div style="width: 20%;">
-              <button type="button" class="btn btn-info" style="background-color: #00ADB5;">Clear</button>
-            </div>
+            <textarea v-model="form.about" class="p-3 w-100" rows="5"  placeholder="About Hotel" style="background-color: #00ADB5;"></textarea>
 
             <label for="">Room type</label>
 
-            <div class="d-flex justify-content-between align-items-center">
-              <input type="text" class="w-25" placeholder="Bed">
-              <input type="text" class="w-25" placeholder="Price">
-              <input type="text" class="w-25" placeholder="Optional">
-              <!-- <button type="button" class="btn btn-info" style="background-color: #00ADB5;">Bed</button>&nbsp;
-              <button type="button" class="btn btn-info" style="background-color: #00ADB5;">Price</button>&nbsp;
-              <button type="button" class="btn btn-info" style="background-color: #00ADB5;">Optional</button>
-              &nbsp; -->
-              <div style="cursor:pointer"><i class="fas fa-plus" style="font-size:24px"></i> </div>
-              <div style="cursor:pointer"><i class="fas fa-times" style="font-size:24px"></i></div>
+            <div v-for="i in roomType" :key="i"  class="d-flex justify-content-between align-items-center mb-3">
+              <!-- <input :id="'Bed'+(i+1)" type="text" class="w-25" placeholder="Bed"> -->
+              <select name="bed" :id="'Bed'+i" class="w-25" style="padding:9px" >
+                <option value="" hidden>Bed</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="Family">Family</option>
+              </select>
+              <input :id="'Price'+i" type="text" class="w-25 m-0" placeholder="Price">
+              <select name="optional" :id="'Optional'+i" class="w-25" style="padding:9px">
+                <option value="None">None</option>
+                <option value="Fan">Fan</option>
+                <option value="Air-Conditioner">Air-Conditioner</option>
+              </select>
+              <div style="cursor:pointer" @click="deletedRoom"><i class="fas fa-times" style="font-size:24px"></i></div>
             </div>
-            <!-- <div style="width: 20%;">
-              <button type="button" class="btn btn-info" style="background-color: #00ADB5;">Add</button>
-            </div> -->
+            <div style="width: 20%;">
+              <button @click="addMoreRoom" type="button" class="btn btn-info" style="background-color: #00ADB5;">Add</button>
+            </div>
           </div>
 
           <div class="col-50">
             <label for="cname">Location</label>
-            <input type="text" id="cname" name="cardname" style="background-color: #00ADB5;" placeholder="Siem Reap/Cambodia">
+            <input v-model="form.location" type="text" id="cname" name="location" style="background-color: #00ADB5;" placeholder="Link">
             <label for="ccnum">Contact</label>
-            <input type="text" class="p-3" id="ccnum" name="cardnumber" style="background-color: #00ADB5;" placeholder="+855 11 22 33 44">
+            <input v-model="form.contact" type="text" class="p-3" id="ccnum" name="contact" style="background-color: #00ADB5;" placeholder="+855 11 22 33 44">
             <label for="expmonth">Email</label>
-            <input type="text" class="p-3" id="expmonth" name="expmonth" style="background-color: #00ADB5;" placeholder="hotel@gmail.com">
+            <input v-model="form.email" type="text" class="p-3" id="expmonth" name="email" style="background-color: #00ADB5;" placeholder="hotel@gmail.com">
             <br>
             <label for="cname">Star</label>
-            <select name="star" class="w-100 p-3 mb-2" style="background-color: #00ADB5;">
+            <select v-model="form.stars" name="star" class="w-100 p-3 mb-2" >
               <option value="">None</option>
               <option value="1">1</option>
               <option value="2">2</option>
@@ -91,7 +94,7 @@
             <span class="fa fa-star"></span>
             <span class="fa fa-star"></span> -->
             <label for="cname">Images</label>
-            <input type="file" id="img" name="img" multiple>
+            <input @change="uploadImgs" type="file" id="img" name="img" multiple>
             <br><br><br><br><br>
             <label for="">Service</label>
             <div class="service1">
@@ -100,7 +103,7 @@
                   <i class="fas fa-wifi"></i>
                   <label for="">Free WIFI</label>
                   <label class="container1">
-                    <input type="checkbox" checked="checked">
+                    <input v-model="form.services.free_wifi" type="checkbox" >
                     <span class="checkmark"></span>
                   </label>
                 </div>
@@ -109,7 +112,7 @@
                   <i class="fad fa-spa"></i>
                   <label for="">Spa</label>
                   <label class="container1">
-                    <input type="checkbox" checked="checked">
+                    <input v-model="form.services.spa" type="checkbox" >
                     <span class="checkmark"></span>
                   </label>
                 </div>
@@ -117,7 +120,7 @@
                   <i class="fas fa-utensils-alt"></i>
                   <label for="">Food</label>
                   <label class="container1">
-                    <input type="checkbox" checked="checked">
+                    <input v-model="form.services.food" type="checkbox" >
                     <span class="checkmark"></span>
                   </label>
                 </div>
@@ -128,7 +131,7 @@
                   <i class="far fa-parking"></i>
                   <label for="">Parking</label>
                   <label class="container1">
-                    <input type="checkbox" checked="checked">
+                    <input v-model="form.services.parking" type="checkbox" >
                     <span class="checkmark"></span>
                   </label>
                 </div>
@@ -136,7 +139,7 @@
                   <i class="far fa-swimmer"></i>
                   <label for="">Pool</label>
                   <label class="container1">
-                    <input type="checkbox" checked="checked">
+                    <input v-model="form.services.pool" type="checkbox" >
                     <span class="checkmark"></span>
                   </label>
                 </div>
@@ -144,7 +147,7 @@
                   <i class="fal fa-dumbbell"></i>
                   <label for="">Gym</label>
                   <label class="container1">
-                    <input type="checkbox" checked="checked">
+                    <input v-model="form.services.gym" type="checkbox" >
                     <span class="checkmark"></span>
                   </label>
                 </div>
@@ -155,8 +158,11 @@
         </div>
         
           <div class="inline1">
-            <button type="button" class="btn btn-info" style="background-color: #00ADB5;">Confirm</button>&nbsp;
-            <button type="button" class="btn btn-info" style="background-color: #00ADB5;">Cancel</button>
+            <button @click="addHotel" type="button" class="btn btn-info" style="background-color: #00ADB5;"
+            :disabled="!form.hotelName||!form.contact||!form.location||!form.dateOfBuild||!form.province||!form.about
+            ||!form.urlImages.length>0">
+            Confirm</button>&nbsp;
+            <!-- <button type="button" class="btn btn-info" style="background-color: #00ADB5;">Cancel</button> -->
           </div>
       </form>
     </div>
@@ -168,12 +174,74 @@
 </template>
 
 <script>
-
+import uploadImgs from '../firebase/uploadImg'
+import modelHotel from '../firebase/form'
 export default {
-  name: 'DetailPage',
-  data: () => ({
-   
-  })
+    data(){
+      return{
+        roomType:1,
+        form:{
+            hotelName: null ,
+            location: null ,
+            dateOfBuild: null,
+            contact: null,
+            website: null,
+            email: null,
+            province: '',
+            stars: '',
+            about: null,
+            roomTypes:[],   // array
+            services: {
+              free_wifi:true,
+              spa:true,
+              food:true,
+              parking:true,
+              pool:true,
+              gym:true
+            },    // array of object
+            urlImages:null, 
+        },
+      }
+    },
+    methods:{
+      addMoreRoom(){
+        this.roomType++
+      },
+      deletedRoom(){
+        this.roomType--
+      },
+      uploadImgs(e){
+        this.form.urlImages=e.target.files
+        console.log(this.form.urlImages.length);
+      },
+      async addHotel(){
+        for (let i = 1; i <= this.roomType; i++) {
+          let quantityOfBed = document.getElementById('Bed'+i).value
+          let price = document.getElementById('Price'+i).value
+          let optional = document.getElementById('Optional'+i).value
+          var objectRoom ={
+            bed:quantityOfBed,
+            price:price,
+            optional:optional
+          }
+          this.form.roomTypes.push(objectRoom)
+        }
+        this.form.urlImages = await uploadImgs(this.form.urlImages)
+        if(this.form.urlImages.length>0&&this.form.roomTypes.length>0){
+            
+            let isSuccess = modelHotel(this.form)
+            console.log(isSuccess);
+            if(isSuccess){
+              document.getElementById('formHotel').reset()
+              // setTimeout(() => {
+              
+              // }, 3000);
+            }
+            
+        }
+      }
+    }
+  
 }
 </script>
 
@@ -295,5 +363,7 @@ span.price {
     margin-bottom: 20px;
   }
 }
-
+select{
+  background-color: #00ADB5;
+}
 </style>
