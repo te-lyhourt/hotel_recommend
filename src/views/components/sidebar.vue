@@ -75,7 +75,7 @@ export default {
 .sidebar {
   margin-top: 100px;
   margin-left: 55px;
-  width: 250px;
+  width: 290px;
   height: 600px;
   background-color: #222831;
   position: sticky;
@@ -113,7 +113,8 @@ export default {
   margin: 0;
 }
 .filter-btn:hover {
-  color: black;
+  color: #00adb5;
+  background: white;
 }
 .flex-box{
     display: flex;
