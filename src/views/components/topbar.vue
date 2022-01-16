@@ -2,7 +2,7 @@
   <div class="topbar">
     <div class="left">
       <logo></logo>
-      <input type="text" class="search">
+      <input v-model="nameHotel" type="text" class="search" placeholder="Search Hotel">
     </div>
     <div class="right">
       <!-- <div v-if="isLogin" class="login">
@@ -23,7 +23,7 @@
 </template>
 <script>
 import logo from "./logo.vue";
-
+import searchedHotel from '../../firebase/searchHotel'
 // import Profile from './profile.vue';
 // export default {
 //   setup() {
@@ -32,10 +32,21 @@ import logo from "./logo.vue";
 //   }
 // }
 export default {
+  data(){
+    return{
+      nameHotel:null,
+    }
+  },
   components: { 
     logo ,
     // Profile
   },
+  watch:{
+    async nameHotel(){
+      let hotel = await searchedHotel(this.nameHotel)
+      console.log(hotel);
+    }
+  }
 };
 </script>
 <style scoped>

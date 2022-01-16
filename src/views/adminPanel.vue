@@ -1,6 +1,6 @@
 <template>
 
-    <body>
+    <body v-if="listHotels">
         <nav class="navbar">
             <div class="container">
                 <div class="navbar-header">
@@ -50,7 +50,7 @@
 
         <div class="container-fluid" style="padding: 0 5rem">
             <div style="padding-bottom: 1.5rem">
-                <button type="button" class="btn btn-primary"><i class="fas fa-plus"></i>  Add Hotel</button>
+                <a href="/admin/create-hotel" type="button" class="btn btn-primary"><i class="fas fa-plus"></i>  Add Hotel</a>
                 <button type="button" class="btn btn-primary pull-right"> Sort by</button>
                 <button type="button" class="btn btn-primary pull-right"> <i class="fas fa-calendar-day"></i>  Date</button>
             </div>
@@ -60,13 +60,50 @@
                     <tr>
                         <td>Hotel Name</td>
                         <td>Price</td>
-                        <td>Locations</td>
+                        <td>City/Province</td>
                         <td>Rating</td>
                         <td style="width: 20rem">Action</td>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
+                    <tr v-for="hotel in listHotels" :key="hotel.uid">
+                        <td>{{hotel.data.hotelName}}</td>
+                        <td>{{hotel.data.roomTypes[0].price}}$</td>
+                        <td v-if="hotel.data.province=='01'">Banteay Meanchey</td>
+                        <td v-if="hotel.data.province=='02'">Battambang</td>
+                        <td v-if="hotel.data.province=='03'">Kampong Cham</td>
+                        <td v-if="hotel.data.province=='04'">Kampong Chhnang</td>
+                        <td v-if="hotel.data.province=='05'">Kampong Speu</td>
+                        <td v-if="hotel.data.province=='06'">Kampong Thom</td>
+                        <td v-if="hotel.data.province=='07'">Kampot</td>
+                        <td v-if="hotel.data.province=='08'">Kandal</td>
+                        <td v-if="hotel.data.province=='09'">Koh Kong</td>
+                        <td v-if="hotel.data.province==10">Kratie</td>
+                        <td v-if="hotel.data.province==11">Mondul Kiri</td>
+                        <td v-if="hotel.data.province==12">Phnom Penh</td>
+                        <td v-if="hotel.data.province==13">Preah Vihear</td>
+                        <td v-if="hotel.data.province==14">Prey Veng</td>
+                        <td v-if="hotel.data.province==15">Pursat</td>
+                        <td v-if="hotel.data.province==16">Ratanak Kiri</td>
+                        <td v-if="hotel.data.province==17">Siem Reap</td>
+                        <td v-if="hotel.data.province==18">Preah Sihanouk</td>
+                        <td v-if="hotel.data.province==19">Stung Treng</td>
+                        <td v-if="hotel.data.province==20">Svay Rieng</td>
+                        <td v-if="hotel.data.province==21">Takeo</td>
+                        <td v-if="hotel.data.province==22">Oddar Meanchey</td>
+                        <td v-if="hotel.data.province==23">Kep</td>
+                        <td v-if="hotel.data.province==24">Pailin</td>
+                        <td v-if="hotel.data.province==25">Tboung Khmum</td>
+                        <td>{{hotel.data.rating.length>0?hotel.data.rating:0}}</td>
+                        <td>
+                            <div class="btn-group">
+                                <a :href="'/admin/'+hotel.uid" class="btn btn-primary"><i class="fas fa-pen"></i> Edit</a>
+                                <button @click="deletedHotel(hotel.uid)" class="btn btn-primary"><i class="fas fa-trash"></i> Delete</button>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <!-- <tr>
                         <td>Sokha</td>
                         <td>10$</td>
                         <td>PP</td>
@@ -90,20 +127,7 @@
                                 <a href="#" class="btn btn-primary"><i class="fas fa-trash"></i> Delete</a>
                             </div>
                         </td>
-                    </tr>
-
-                    <tr>
-                        <td>Sokha</td>
-                        <td>10$</td>
-                        <td>PP</td>
-                        <td>4.5</td>
-                        <td>
-                            <div class="btn-group">
-                                <a href="#" class="btn btn-primary"><i class="fas fa-pen"></i> Edit</a>
-                                <a href="#" class="btn btn-primary"><i class="fas fa-trash"></i> Delete</a>
-                            </div>
-                        </td>
-                    </tr>
+                    </tr> -->
 
                 </tbody>
             </table>
@@ -124,7 +148,30 @@
 
     </body>
 </template>
-
+<script>
+import listHotels from '../firebase/listHotel'
+import deletedHotel from '../firebase/deletedHotel'
+export default {
+    data(){
+        return{
+            listHotels:null
+        }
+    },
+    setup() {
+        
+    },
+    methods:{
+        async deletedHotel(id){
+            this.listHotels = await deletedHotel(id)
+            console.log(this.listHotels);
+        }
+    },
+    async mounted(){
+        this.listHotels=await listHotels()
+        console.log(this.listHotels);
+    }
+}
+</script>
 <style scoped>
     @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap');
 

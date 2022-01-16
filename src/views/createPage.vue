@@ -1,6 +1,5 @@
 <template>
 <div>
-  
   <div class="background1">
     <div class="container">
       <form id="formHotel">
@@ -94,8 +93,15 @@
             <span class="fa fa-star checked"></span>
             <span class="fa fa-star"></span>
             <span class="fa fa-star"></span> -->
-            <label for="cname">Images</label>
-            <input @change="uploadImgs" type="file" id="img" name="img" multiple>
+            <div v-if="routes.includes('create')">
+              <label for="cname">Images</label>
+              <input @change="uploadImgs" type="file" id="img" name="img" multiple>
+            </div>
+            <div v-else class="row mt-1" style="padding:0 16px">
+              <label for="" class="p-0">Images</label>
+              <img  v-for="img,i in form.images" :key="i" :src="img" class=" img-thumbnail w-25" alt="">
+            </div>
+            
             <br><br><br><br><br>
             <label for="">Service</label>
             <div class="service1">
@@ -157,16 +163,16 @@
           </div>
         </div>  
         </div>
-        
           <div class="inline1">
-            <button @click="addHotel" type="button" class="btn btn-info" style="background-color: #00ADB5;"
+            <button v-if="routes.includes('create')" @click="addHotel" type="button" class="btn btn-info" style="background-color: #00ADB5;"
             :disabled="!form.hotelName||!form.contact||!form.location||!form.dateOfBuild||!form.province||!form.about
             ||!form.urlImages.length>0">
             Confirm</button>&nbsp;
-            <!-- <button type="button" class="btn btn-info" style="background-color: #00ADB5;">Cancel</button> -->
+            <button v-else @click="updatedHotel" type="button" class="btn btn-info" style="background-color: #00ADB5;">Update</button>
           </div>
+          
       </form>
-      <modelPopUp :message="isSuccess"></modelPopUp>
+      <!-- <modelPopUp :message="isSuccess"></modelPopUp> -->
 
     </div>
   </div>
@@ -178,9 +184,11 @@
 <script>
 import uploadImgs from '../firebase/uploadImg'
 import modelHotel from '../firebase/form'
-import modelPopUp from './components/modalPopUp.vue'
-import {Modal} from 'bootstrap'
+// import modelPopUp from './components/modalPopUp.vue'
+// import {Modal} from 'bootstrap'
 import resetData from '../firebase/resetForm'
+import listOneHotelByID from '../firebase/listOneHotel'
+import updatedHotel from '../firebase/updateHotel'
 export default {
     data(){
       return{
@@ -209,20 +217,21 @@ export default {
         },
       }
     },
-    components:{modelPopUp},
+    components:{},
+    computed:{
+      routes(){
+            return this.$route.params.type
+        }
+    },  
     methods:{
       addMoreRoom(){
         this.roomType++
-        const modal = new Modal(document.getElementById('alertModal'))
-        console.log(modal);
-        modal.show()
       },
       deletedRoom(){
         this.roomType--
       },
       uploadImgs(e){
         this.form.urlImages=e.target.files
-        console.log(this.form.urlImages.length);
       },
       async addHotel(){
         for (let i = 1; i <= this.roomType; i++) {
@@ -240,25 +249,53 @@ export default {
         if(this.form.urlImages.length>0&&this.form.roomTypes.length>0){
             this.isSuccess = modelHotel(this.form)
             if(this.isSuccess){
-              const modal = new Modal(document.getElementById('alertModal'))
-              modal.show()
               this.form = resetData()
               document.getElementById('img').value=null
               this.roomType=1
               document.getElementById('Bed1').value=null
               document.getElementById('Price1').value=null
               document.getElementById('Optional1').value=null
-              setTimeout(() => {
-                modal.hide()
-              }, 3000);
+              alert(this.isSuccess)
             }
             
         }
         else{
           alert('At least one room types!')
         }
+      },
+      async updatedHotel(){
+        this.form.roomTypes=[]
+        for (let i = 1; i <= this.roomType; i++) {
+          let quantityOfBed = document.getElementById('Bed'+i).value
+          let price = document.getElementById('Price'+i).value
+          let optional = document.getElementById('Optional'+i).value
+          var objectRoom ={
+            bed:quantityOfBed,
+            price:price,
+            optional:optional
+          }
+          this.form.roomTypes.push(objectRoom)
+        }
+        let isSuccess = await updatedHotel(this.routes,this.form)
+        alert(isSuccess)
       }
+    },
+    async mounted(){
+        if(!this.routes.includes('create')){
+          this.form = await listOneHotelByID(this.routes)
+          console.log(this.form);
+          this.roomType = this.form.roomTypes.length
+          setTimeout(() => {
+            this.form.roomTypes.forEach((data,i)=>{
+              document.getElementById('Bed'+(i+1)).value=data.bed
+              document.getElementById('Price'+(i+1)).value=data.price
+              document.getElementById('Optional'+(i+1)).value=data.optional
+            })
+          }, 200);
+        }
+        
     }
+    
   
 }
 </script>
