@@ -7,7 +7,7 @@ export default async function listHotels(){
     hotels = await new Promise(resolve=>{
         let datas=[]
         querySnapshot.forEach(res=>{
-            datas.push(res.data())
+            datas.push({uid:res.id,data:res.data()})
         })
         return resolve(datas)
     })   

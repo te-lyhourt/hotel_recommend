@@ -1,6 +1,6 @@
 <template >
   <div class="province">
-    <select name="province">
+    <select v-model="sortProvince" name="province">
       <option value="">All</option>
       <option value="01">Banteay Meanchey</option>
       <option value="02">Battambang</option>
@@ -31,7 +31,20 @@
   </div>
 </template>
 <script>
-export default {};
+import sortHotel from '../../firebase/sortByProvince'
+export default {
+  data(){
+    return{
+      sortProvince:''
+    }
+  },
+  watch:{
+    async sortProvince(){
+        let hotel = await sortHotel(this.sortProvince)
+        console.log(hotel);
+    }
+  }
+};
 </script>
 <style scoped>
 .province{

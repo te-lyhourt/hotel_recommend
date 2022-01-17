@@ -27,8 +27,8 @@ const routes=[
         component:adminPanel
     },
     {
-        path: '/create-page',
-        name: 'createPage',
+        path: '/admin/:type',
+        name: 'create/updatePage',
         component:createPage
     }
 ]
