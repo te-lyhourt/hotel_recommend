@@ -119,9 +119,7 @@
                     </li>
                 </ul>
             </nav>
-
         </div>
-
     </body>
 </template>
 
@@ -137,7 +135,6 @@
 
     body {
         font-family: 'Roboto', sans-serif;
-
         background-color: #393E46;
 
     }

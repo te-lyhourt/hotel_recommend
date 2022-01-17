@@ -4,6 +4,7 @@ import DetailPage from '../views/DetailPage.vue'
 import loginAdmin from '../views/loginAdmin.vue'
 import adminPanel from '../views/adminPanel.vue'
 import createPage from '../views/createPage.vue'
+import loginPage from '../views/loginPage.vue'
 const routes=[
     {
         path:'/',
@@ -30,6 +31,11 @@ const routes=[
         path: '/admin/create-hotel',
         name: 'createPage',
         component:createPage
+    },
+    {
+        path: '/login-page',
+        name: 'loginPage',
+        component: loginPage
     }
 ]
 
