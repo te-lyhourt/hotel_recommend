@@ -71,6 +71,7 @@ export default {
 .hotel_row {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+  background: #222831;
 }
 .hotel_image {
   width: 230px;
