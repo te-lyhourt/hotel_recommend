@@ -15,7 +15,7 @@ export default function modelHotel(data){
         services: data.services,    // array of object
         images: data.urlImages,        //store array of image url
         comments: [],
-        rating:[]
+        rating:null,
     })
     return "Success Added"
 }

@@ -94,7 +94,7 @@
                         <td v-if="hotel.data.province==23">Kep</td>
                         <td v-if="hotel.data.province==24">Pailin</td>
                         <td v-if="hotel.data.province==25">Tboung Khmum</td>
-                        <td>{{hotel.data.rating.length>0?hotel.data.rating:0}}</td>
+                        <td>{{hotel.data.rating?hotel.data.rating:0}}</td>
                         <td>
                             <div class="btn-group">
                                 <a :href="'/admin/'+hotel.uid" class="btn btn-primary"><i class="fas fa-pen"></i> Edit</a>
