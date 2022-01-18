@@ -339,9 +339,102 @@
             </div>
           </div>
         </div>
-        
-        <div class="col-12 col-sm-12 col-md-11 col-lg-8 col-xl-8">
 
+        <div class="col-12 col-sm-12 col-md-11 col-lg-8 col-xl-8">
+          <div class="card room-type-card px-4 py-4">
+            <div class="row">
+              <div class="col-1">
+                <img :src="wifiImage" alt="..." class="rounded-circle" style="width: 55px" />
+              </div>
+              <div class="col-11">
+                <textarea
+                  class="form-control"
+                  aria-label="Comment"
+                  placeholder="Comment ..."
+                  style="border-radius: 10px; color: white; background-color: #00adb5; border: none"
+                  rows="3"
+                ></textarea>
+                <div class="mt-3">
+                  <button
+                    class="btn btn-sm"
+                    style="color: black; background-color: #00adb5; border-radius: 10px; margin-right: 10px"
+                  >
+                    Send
+                  </button>
+                  <button class="btn ml-1 btn-sm" style="color: black; background-color: #00adb5; border-radius: 10px">
+                    Clear
+                  </button>
+                </div>
+                <hr style="height: 2px" />
+              </div>
+            </div>
+
+            <!-- Comment -->
+            <div class="row" style="padding-left: 70px">
+              <div class="col-1">
+                <img :src="wifiImage" alt="..." class="rounded-circle" style="width: 40px" />
+              </div>
+              <div class="col-11">
+                <h5>
+                  <i> Name ABCDE </i>
+                </h5>
+                <p>
+                  <i>
+                    type and scrambled it to make a type specimen book. It has survived not only five centuries, but
+                    also the leap into electronic typesetting, remontent of a page when looking at its layout. The point
+                    of using Lorem Ipsum is that it h.
+                  </i>
+                </p>
+                <button
+                  class="btn btn-sm"
+                  style="color: black; background-color: #00adb5; border-radius: 10px; margin-right: 10px"
+                >
+                  Reply
+                </button>
+
+                <!-- reply comment -->
+                <div class="my-3">
+                  <div class="row">
+                    <div class="col-1">
+                      <img :src="wifiImage" alt="..." class="rounded-circle" style="width: 40px" />
+                    </div>
+                    <div class="col-11">
+                      <h5>
+                        <i> Name ABCDE </i>
+                      </h5>
+                      <p>
+                        <i>
+                          type and scrambled it to make a type specimen book. It has survived not only five centuries,
+                          but also the leap into electronic typesetting, remontent of a page when looking at its layout.
+                          The point of using Lorem Ipsum is that it h.
+                        </i>
+                      </p>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-1">
+                      <img :src="wifiImage" alt="..." class="rounded-circle" style="width: 40px" />
+                    </div>
+                    <div class="col-11">
+                      <h5>
+                        <i> Name ABCDE </i>
+                      </h5>
+                      <p>
+                        <i>
+                          type and scrambled it to make a type specimen book. It has survived not only five centuries,
+                          but also the leap into electronic typesetting, remontent of a page when looking at its layout.
+                          The point of using Lorem Ipsum is that it h.
+                        </i>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <!-- end reply comment -->
+              </div>
+            </div>
+            <!-- end comment -->
+          </div>
         </div>
         <div></div>
       </div>
