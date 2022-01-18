@@ -1,46 +1,28 @@
 <template>
   <div class="top-bar">
-    <nav class="mb-4 navbar navbar-expand-lg navbar-dark top">
-      <div class="big-content">
-        <div style="display: flex">
-          <div class="container">
-            <a class="brand" href="/">
-              <img :src="logo" alt="band" class="logo" />
-            </a>
-          </div>
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-toggle="collapse"
-            data-target="#navbarSupportedContent-4"
-            aria-controls="navbarSupportedContent-4"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span class="navbar-toggler-icon"></span>
-          </button>
-        </div>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent-4">
-          <ul class="navbar-nav">
-            <li class="nav-item saerch active">
-              <search-bar></search-bar>
-            </li>
-            <li class="nav-item" v-if="isLogin">
-              <profile :src="user.photoURL" />
-              <button class="filter-btn white-text" @click="signOut">
-                Sign Out
-              </button>
-            </li>
-            <li class="nav-item" v-else>
-              <button class="filter-btn white-text" @click="signIn">
-                Sign in
-              </button>
-            </li>
-          </ul>
+    <div class="big-content">
+      <div style="display: flex">
+        <div class="container">
+          <a class="brand" href="/">
+            <img :src="logo" alt="band" class="logo" />
+          </a>
         </div>
       </div>
-    </nav>
+      <div class="flex-center">
+        <div class="saerch">
+          <search-bar></search-bar>
+        </div>
+        <div class="" v-if="isLogin">
+          <profile :src="user.photoURL" />
+          <button class="filter-btn title" @click="signOut">
+            Sign Out
+          </button>
+        </div>
+        <div class="" v-else>
+          <button class="filter-btn title" @click="signIn">Sign in</button>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 <script>
@@ -81,7 +63,6 @@ export default {
 };
 </script>
 <style scoped>
-
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -94,6 +75,7 @@ export default {
   position: sticky;
   top: 0;
   z-index: 1000;
+  background: #222831;
 }
 .top {
   display: flex;
@@ -134,9 +116,8 @@ input:focus {
 }
 
 .navbar-nav {
-
-    width: 88%;
-    margin: 0 auto;
+  width: 88%;
+  margin: 0 auto;
 }
 .navbar-collapse {
   justify-content: flex-end;
@@ -163,7 +144,6 @@ input:focus {
   }
 }
 
-
 .saerch {
   margin-right: 20px !important;
 }
@@ -184,11 +164,10 @@ input:focus {
   justify-content: space-between;
 }
 .container {
-    padding-top: 10px;
-    width: 100%;
+  width: 100%;
 }
 
 .logo {
-    width: 70px;
+  width: 70px;
 }
 </style>

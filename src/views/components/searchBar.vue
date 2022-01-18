@@ -24,7 +24,7 @@
 
         type="text"
         class="search-input"
-        placeholder="ស្វែងរកទំនិញ"
+        placeholder="Search"
         @keyup.enter="search"
       />
               <!-- v-model="searchValue" -->
@@ -158,6 +158,7 @@ ul {
   padding: 0 10px;
   color: #3a3a3a;
   max-width: 200px;
+  font-size: 15px;
 }
 .btn {
   box-shadow: none;

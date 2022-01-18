@@ -35,6 +35,14 @@
           <img :src="spa" alt="" class="feature_logo" />
           <p class="white-text">Spa</p>
         </div>
+        <div class="flex-center feature_box">
+          <img :src="gym" alt="" class="feature_logo" />
+          <p class="white-text">gym</p>
+        </div>
+        <div class="flex-center feature_box">
+          <img :src="food" alt="" class="feature_logo" />
+          <p class="white-text">food</p>
+        </div>
       </div>
     </div>
   </div>
@@ -48,6 +56,8 @@ export default {
       spa: require("../../assets/detail_page/spa.png"),
       swim: require("../../assets/detail_page/swim.png"),
       wifi: require("../../assets/detail_page/wifi.png"),
+      gym:require('../../assets/detail_page/gym.png'),
+      food:require('../../assets/detail_page/food.png'),
       hotelName: "Hotel Name",
     };
   },
@@ -93,7 +103,7 @@ export default {
 }
 .box-3 {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
 }
 .feature_box {
   flex-direction: column;
