@@ -21,17 +21,20 @@
 
     <div class="search">
       <input
-        v-model="searchValue"
+
         type="text"
         class="search-input"
         placeholder="ស្វែងរកទំនិញ"
         @keyup.enter="search"
       />
+              <!-- v-model="searchValue" -->
     </div>
 
     <a @click="cancel"
-      ><i class="fas fa-times" aria-hidden="true" v-if="searchValue"></i
+    
+      ><i class="fas fa-times" aria-hidden="true" ></i
     ></a>
+    <!-- v-if="searchValue" -->
   </div>
 </template>
 <script>

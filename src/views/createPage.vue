@@ -184,8 +184,6 @@
 <script>
 import uploadImgs from '../firebase/uploadImg'
 import modelHotel from '../firebase/form'
-// import modelPopUp from './components/modalPopUp.vue'
-// import {Modal} from 'bootstrap'
 import resetData from '../firebase/resetForm'
 import listOneHotelByID from '../firebase/listOneHotel'
 import updatedHotel from '../firebase/updateHotel'
