@@ -61,7 +61,7 @@
                 <!-- <button type="button" class="btn btn-primary pull-right"> Sort by</button> -->
                 <button type="button" class="btn btn-primary pull-right"> <i class="fas fa-calendar-day"></i>
                     Date</button>
-                <form action="" class="pull-right">
+                
                     
                     <select name="" id=""  class="btn btn-primary pull-right" style="background-color: #00ADB5;">
                         <option value="All">All</option>
@@ -69,7 +69,7 @@
                         <option value="Battambong">Battambong</option>
                         <option value="Siem Rieab">Siem Rieab</option>
                     </select>
-                </form>
+                
                 
             </div>
 
