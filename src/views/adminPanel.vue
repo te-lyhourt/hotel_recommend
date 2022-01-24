@@ -2,8 +2,9 @@
 
     <body v-if="listHotels">
         <nav class="navbar">
-            <div class="container">
-                <div class="navbar-header">
+            <div class="container-fluid">
+                <div class="navbar-header" style="padding: 0 3rem">
+                    
                     <button class="navbar-toggler" data-toggle="open-navbar1">
                         <span></span>
                         <span></span>
@@ -12,10 +13,15 @@
                     <a href="#">
                         <h4>Awesome<span>logo</span></h4>
                     </a>
+                    
+                    <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
+                        aria-describedby="search-addon" style="margin: 0 0 0 5rem"/>
+                    <button type="button" class="btn btn-primary">search</button>
                 </div>
                 <div class="navbar-menu" id="open-navbar1">
                     <ul class="navbar-nav">
-                        <li class="active"><a href="#">Home</a></li>
+
+                        <!-- <li class="active"><a href="#">Home</a></li>
                         <li class="navbar-dropdown">
                             <a href="#" class="dropdown-toggler" data-dropdown="my-dropdown-id">
                                 Categories <i class="fa fa-angle-down"></i>
@@ -28,8 +34,8 @@
                                 <li class="separator"></li>
                                 <li><a href="#">One more seprated link.</a></li>
                             </ul>
-                        </li>
-                        <li class="navbar-dropdown">
+                        </li> -->
+                        <!-- <li class="navbar-dropdown">
                             <a href="#" class="dropdown-toggler" data-dropdown="blog">
                                 Blog <i class="fa fa-angle-down"></i>
                             </a>
@@ -41,8 +47,8 @@
                                 <li class="separator"></li>
                                 <li><a href="#">One more seprated link.</a></li>
                             </ul>
-                        </li>
-                        <li><a href="#">Signin</a></li>
+                        </li> -->
+                        <li style="padding: 0 3rem"><a href="#"><i class="fas fa-sign-out-alt"></i></a></li>
                     </ul>
                 </div>
             </div>
@@ -50,14 +56,26 @@
 
         <div class="container-fluid" style="padding: 0 5rem">
             <div style="padding-bottom: 1.5rem">
-                <a href="/admin/create-hotel" type="button" class="btn btn-primary"><i class="fas fa-plus"></i>  Add Hotel</a>
-                <button type="button" class="btn btn-primary pull-right"> Sort by</button>
-                <button type="button" class="btn btn-primary pull-right"> <i class="fas fa-calendar-day"></i>  Date</button>
+                <a href="/admin/create-hotel" type="button" class="btn btn-primary"  style="background-color: #00ADB5;"><i class="fas fa-plus"></i> Add
+                    Hotel</a>
+                <!-- <button type="button" class="btn btn-primary pull-right"> Sort by</button> -->
+                <button type="button" class="btn btn-primary pull-right"> <i class="fas fa-calendar-day"></i>
+                    Date</button>
+                <form action="" class="pull-right">
+                    
+                    <select name="" id=""  class="btn btn-primary pull-right" style="background-color: #00ADB5;">
+                        <option value="All">All</option>
+                        <option value="Phnom Penh">Phnom Penh</option>
+                        <option value="Battambong">Battambong</option>
+                        <option value="Siem Rieab">Siem Rieab</option>
+                    </select>
+                </form>
+                
             </div>
 
-            <table class="table table-dark" >
+            <table class="table table-dark">
                 <thead style="width: 100%">
-                    <tr>
+                    <tr style="font-weight: bold;">
                         <td>Hotel Name</td>
                         <td>Price</td>
                         <td>City/Province</td>
@@ -97,8 +115,10 @@
                         <td>{{hotel.data.rating?hotel.data.rating:0}}</td>
                         <td>
                             <div class="btn-group">
-                                <a :href="'/admin/'+hotel.uid" class="btn btn-primary"><i class="fas fa-pen"></i> Edit</a>
-                                <button @click="deletedHotel(hotel.uid)" class="btn btn-primary"><i class="fas fa-trash"></i> Delete</button>
+                                <a :href="'/admin/'+hotel.uid" class="btn btn-primary" style="background-color: #00ADB5;"><i class="fas fa-pen"></i>
+                                    Edit</a>
+                                <button @click="deletedHotel(hotel.uid)" class="btn btn-primary"><i
+                                        class="fas fa-trash"></i> Delete</button>
                             </div>
                         </td>
                     </tr>
@@ -147,28 +167,28 @@
     </body>
 </template>
 <script>
-import listHotels from '../firebase/listHotel'
-import deletedHotel from '../firebase/deletedHotel'
-export default {
-    data(){
-        return{
-            listHotels:null
-        }
-    },
-    setup() {
-        
-    },
-    methods:{
-        async deletedHotel(id){
-            this.listHotels = await deletedHotel(id)
+    import listHotels from '../firebase/listHotel'
+    import deletedHotel from '../firebase/deletedHotel'
+    export default {
+        data() {
+            return {
+                listHotels: null
+            }
+        },
+        setup() {
+
+        },
+        methods: {
+            async deletedHotel(id) {
+                this.listHotels = await deletedHotel(id)
+                console.log(this.listHotels);
+            }
+        },
+        async mounted() {
+            this.listHotels = await listHotels()
             console.log(this.listHotels);
         }
-    },
-    async mounted(){
-        this.listHotels=await listHotels()
-        console.log(this.listHotels);
     }
-}
 </script>
 <style scoped>
     @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap');
@@ -178,6 +198,7 @@ export default {
         padding: 0;
         margin: 0;
         color: #eee;
+        font-size: 1.7rem;
     }
 
     body {
@@ -407,5 +428,9 @@ export default {
         .navbar .navbar-header h4 {
             font-size: 1.05rem;
         }
+    }
+
+    button {
+        background-color: #00ADB5;
     }
 </style>
