@@ -28,8 +28,8 @@ const routes=[
         component:adminPanel
     },
     {
-        path: '/admin/create-hotel',
-        name: 'createPage',
+        path: '/admin/:type',
+        name: 'create/updatePage',
         component:createPage
     },
     {
