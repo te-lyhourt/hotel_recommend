@@ -17,9 +17,13 @@ export default async function userAuth(type,data) {
     //     })
     // }
     else if(type=='loginAdmin'){
-        let userAdmin = await signInWithEmailAndPassword(auth,data.email,data.password)
-        if(userAdmin.user){
-            return true
+        try {
+            let userAdmin = await signInWithEmailAndPassword(auth,data.email,data.password)
+            if(userAdmin.user){
+                return true
+            }
+        } catch (error) {
+            return 'hi'
         }
         // if(data.email=="admin@admin.com"){
         //     if(data.password=="admin12345"){

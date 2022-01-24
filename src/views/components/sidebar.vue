@@ -14,7 +14,7 @@
         <button type="button" class="title filter-btn">20$-50$</button>
       </div>
       <div class="flex-box">
-        <button type="button" class="title filter-btn">51$-100$</button>
+        <button @click="sortByPrice(51,100)" type="button" class="title filter-btn">51$-100$</button>
       </div>
       <div class="flex-box">
         <button type="button" class="title filter-btn">Above 100$</button>
@@ -67,8 +67,15 @@
 </template>
 <script>
 import province from "./province.vue";
+import sortByPrice from '../../firebase/sortByPrice'
 export default {
   components: { province },
+  methods:{
+    async sortByPrice(startPrice,endPrice){
+        let hotels = await sortByPrice(startPrice,endPrice)
+        console.log(hotels);
+    }
+  }
 };
 </script>
 <style>

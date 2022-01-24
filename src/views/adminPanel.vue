@@ -2,8 +2,9 @@
 
     <body v-if="listHotels">
         <nav class="navbar">
-            <div class="container">
-                <div class="navbar-header">
+            <div class="container-fluid">
+                <div class="navbar-header" style="padding: 0 3rem">
+                    
                     <button class="navbar-toggler" data-toggle="open-navbar1">
                         <span></span>
                         <span></span>
@@ -12,10 +13,15 @@
                     <a href="#">
                         <h4>Awesome<span>logo</span></h4>
                     </a>
+                    
+                    <input v-model="hotelName" type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
+                        aria-describedby="search-addon" style="margin: 0 0 0 5rem"/>
+                    <button @click="searchHotel" type="button" class="btn btn-primary">search</button>
                 </div>
                 <div class="navbar-menu" id="open-navbar1">
                     <ul class="navbar-nav">
-                        <li class="active"><a href="#">Home</a></li>
+
+                        <!-- <li class="active"><a href="#">Home</a></li>
                         <li class="navbar-dropdown">
                             <a href="#" class="dropdown-toggler" data-dropdown="my-dropdown-id">
                                 Categories <i class="fa fa-angle-down"></i>
@@ -28,8 +34,8 @@
                                 <li class="separator"></li>
                                 <li><a href="#">One more seprated link.</a></li>
                             </ul>
-                        </li>
-                        <li class="navbar-dropdown">
+                        </li> -->
+                        <!-- <li class="navbar-dropdown">
                             <a href="#" class="dropdown-toggler" data-dropdown="blog">
                                 Blog <i class="fa fa-angle-down"></i>
                             </a>
@@ -41,8 +47,8 @@
                                 <li class="separator"></li>
                                 <li><a href="#">One more seprated link.</a></li>
                             </ul>
-                        </li>
-                        <li><a href="#">Signin</a></li>
+                        </li> -->
+                        <li @click="logOut" style="padding: 0 3rem; cursor:pointer"><i class="fas fa-sign-out-alt"></i></li>
                     </ul>
                 </div>
             </div>
@@ -50,14 +56,47 @@
 
         <div class="container-fluid" style="padding: 0 5rem">
             <div style="padding-bottom: 1.5rem">
-                <a href="/admin/create-hotel" type="button" class="btn btn-primary"><i class="fas fa-plus"></i>  Add Hotel</a>
-                <button type="button" class="btn btn-primary pull-right"> Sort by</button>
-                <button type="button" class="btn btn-primary pull-right"> <i class="fas fa-calendar-day"></i>  Date</button>
+                <a href="/admin/create-hotel" type="button" class="btn btn-primary"  style="background-color: #00ADB5;"><i class="fas fa-plus"></i> Add
+                    Hotel</a>
+                <!-- <button type="button" class="btn btn-primary pull-right"> Sort by</button> -->
+                <button type="button" class="btn btn-primary pull-right"> <i class="fas fa-calendar-day"></i> Date</button>
+                
+                    
+                    <select v-model="sortByProvince" id=""  class="btn btn-primary pull-right text-start " style="background-color: #00ADB5;padding:7px">
+                        <option value="">All</option>
+                        <option value="01">Banteay Meanchey</option>
+                        <option value="02">Battambang</option>
+                        <option value="03">Kampong Cham</option>
+                        <option value="04">Kampong Chhnang</option>
+                        <option value="05">Kampong Speu</option>
+                        <option value="06">Kampong Thom</option>
+                        <option value="07">Kampot</option>
+                        <option value="08">Kandal</option>
+                        <option value="09">Koh Kong</option>
+                        <option value="10">Kratie</option>
+                        <option value="11">Mondul Kiri</option>
+                        <option value="12">Phnom Penh</option>
+                        <option value="13">Preah Vihear</option>
+                        <option value="14">Prey Veng</option>
+                        <option value="15">Pursat</option>
+                        <option value="16">Ratanak Kiri</option>
+                        <option value="17">Siemreap</option>
+                        <option value="18">Preah Sihanouk</option>
+                        <option value="19">Stung Treng</option>
+                        <option value="20">Svay Rieng</option>
+                        <option value="21">Takeo</option>
+                        <option value="22">Oddar Meanchey</option>
+                        <option value="23">Kep</option>
+                        <option value="24">Pailin</option>
+                        <option value="25">Tboung Khmum</option>
+                    </select>
+                
+                
             </div>
 
-            <table class="table table-dark" >
+            <table class="table table-dark">
                 <thead style="width: 100%">
-                    <tr>
+                    <tr style="font-weight: bold;">
                         <td>Hotel Name</td>
                         <td>Price</td>
                         <td>City/Province</td>
@@ -94,11 +133,13 @@
                         <td v-if="hotel.data.province==23">Kep</td>
                         <td v-if="hotel.data.province==24">Pailin</td>
                         <td v-if="hotel.data.province==25">Tboung Khmum</td>
-                        <td>{{hotel.data.rating.length>0?hotel.data.rating:0}}</td>
+                        <td>{{hotel.data.rating?hotel.data.rating:0}}</td>
                         <td>
                             <div class="btn-group">
-                                <a :href="'/admin/'+hotel.uid" class="btn btn-primary"><i class="fas fa-pen"></i> Edit</a>
-                                <button @click="deletedHotel(hotel.uid)" class="btn btn-primary"><i class="fas fa-trash"></i> Delete</button>
+                                <a :href="'/admin/'+hotel.uid" class="btn btn-primary" style="background-color: #00ADB5;"><i class="fas fa-pen"></i>
+                                    Edit</a>
+                                <button @click="deletedHotel(hotel.uid)" class="btn btn-primary"><i
+                                        class="fas fa-trash"></i> Delete</button>
                             </div>
                         </td>
                     </tr>
@@ -147,28 +188,52 @@
     </body>
 </template>
 <script>
-import listHotels from '../firebase/listHotel'
-import deletedHotel from '../firebase/deletedHotel'
-export default {
-    data(){
-        return{
-            listHotels:null
-        }
-    },
-    setup() {
-        
-    },
-    methods:{
-        async deletedHotel(id){
-            this.listHotels = await deletedHotel(id)
+    import sortHotel from '../firebase/sortByProvince'
+    import listHotels from '../firebase/listHotel'
+    import deletedHotel from '../firebase/deletedHotel'
+    import userAuth from '../firebase/auth'
+    import searchedHotel from '../firebase/searchHotel'
+    export default {
+        data() {
+            return {
+                listHotels: null,
+                sortByProvince:"",
+                hotelName:null,
+            }
+        },
+        setup() {
+
+        },
+        watch:{
+            async sortByProvince(){
+                let hotel = await sortHotel(this.sortByProvince)
+                this.listHotels=hotel
+            }
+        },
+        methods: {
+            async deletedHotel(id) {
+                this.listHotels = await deletedHotel(id)
+                console.log(this.listHotels);
+            },
+            async logOut(){
+                console.log('hi');
+                let isLogout = await userAuth('signout')
+                if(!isLogout){
+                    
+                    this.$router.push('/login-page')
+                }
+            },
+            async searchHotel(){
+                let hotel = await searchedHotel(this.hotelName)
+                this.listHotels=hotel
+            }
+
+        },
+        async mounted() {
+            this.listHotels = await listHotels()
             console.log(this.listHotels);
         }
-    },
-    async mounted(){
-        this.listHotels=await listHotels()
-        console.log(this.listHotels);
     }
-}
 </script>
 <style scoped>
     @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap');
@@ -178,6 +243,7 @@ export default {
         padding: 0;
         margin: 0;
         color: #eee;
+        font-size: 1.7rem;
     }
 
     body {
@@ -407,5 +473,9 @@ export default {
         .navbar .navbar-header h4 {
             font-size: 1.05rem;
         }
+    }
+
+    button {
+        background-color: #00ADB5;
     }
 </style>
