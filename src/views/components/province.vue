@@ -52,5 +52,6 @@ export default {
     justify-content: center;
     margin-bottom: 15px;
     margin-left: 35px;
+    font-size: 16px;
 }
 </style>

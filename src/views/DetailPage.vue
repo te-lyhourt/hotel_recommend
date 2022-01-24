@@ -2,7 +2,7 @@
   <div class="px-5">
     <div>
       <span id="title">
-        <i>Hotels name is simply dummy text of the printing</i>
+        <i class="white-text" style="font-size:40px;">{{listHotel && listHotel.hotelName}}</i>
       </span>
     </div>
 
@@ -31,36 +31,18 @@
             <div class="mt-3"></div>
 
             <!-- room type items -->
-            <div>
+
+            <div v-for="type in listHotel && listHotel.roomTypes" :key="type.bed">
               <div class="row">
                 <div class="col-6">
-                  <span class="text-14">1 Bed</span>
+                  <span class="text-14">{{type.bed}} Bed</span>
                 </div>
                 <div class="col-6">
-                  <span class="text-14">50$</span>
+                  <span class="text-14">{{type.price}}$</span>
                 </div>
               </div>
             </div>
-            <div>
-              <div class="row">
-                <div class="col-6">
-                  <span class="text-14">2 Beds</span>
-                </div>
-                <div class="col-6">
-                  <span class="text-14">50$</span>
-                </div>
-              </div>
-            </div>
-            <div>
-              <div class="row">
-                <div class="col-6">
-                  <span class="text-14">3 Beds</span>
-                </div>
-                <div class="col-6">
-                  <span class="text-14">50$</span>
-                </div>
-              </div>
-            </div>
+
             <!-- end room type items -->
           </div>
         </div>
@@ -98,7 +80,7 @@
       <hr style="height: 2px" />
 
       <div class="row">
-        <div class="col-2 mx-auto">
+        <div class="col-2 mx-auto" v-if="listHotel &&listHotel.services.free_wifi">
           <div class="text-center">
             <img :src="wifiImage" alt="wifi" style="width: 41px; height: 33px" />
             <div class="text-center mt-3">
@@ -107,7 +89,7 @@
           </div>
         </div>
 
-        <div class="col-2 mx-auto">
+        <div class="col-2 mx-auto" v-if="listHotel &&listHotel.services.parking">
           <div class="text-center">
             <img :src="parkingImage" alt="wifi" style="width: 41px; height: 33px" />
             <div class="text-center mt-3">
@@ -116,7 +98,7 @@
           </div>
         </div>
 
-        <div class="col-2 mx-auto">
+        <div class="col-2 mx-auto" v-if="listHotel &&listHotel.services.spa">
           <div class="text-center">
             <img :src="spaImage" alt="wifi" style="width: 41px; height: 33px" />
             <div class="text-center mt-3">
@@ -125,7 +107,7 @@
           </div>
         </div>
 
-        <div class="col-2 mx-auto">
+        <div class="col-2 mx-auto" v-if="listHotel &&listHotel.services.pool">
           <div class="text-center">
             <img :src="swimImage" alt="wifi" style="width: 41px; height: 33px" />
             <div class="text-center mt-3">
@@ -134,7 +116,7 @@
           </div>
         </div>
 
-        <div class="col-2 mx-auto">
+        <div class="col-2 mx-auto" v-if="listHotel &&listHotel.services.fppd">
           <div class="text-center">
             <img :src="foodImage" alt="wifi" style="width: 41px; height: 33px" />
             <div class="text-center mt-3">
@@ -143,7 +125,7 @@
           </div>
         </div>
 
-        <div class="col-2 mx-auto">
+        <div class="col-2 mx-auto" v-if="listHotel &&listHotel.services.gym">
           <div class="text-center">
             <img :src="gymImage" alt="wifi" style="width: 41px; height: 33px" />
             <div class="text-center mt-3">
@@ -164,13 +146,7 @@
       <hr style="height: 2px" />
 
       <div>
-        <span class="text-14">
-          type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap
-          into electronic typesetting, remontent of a page when looking at its layout. The point of using Lorem Ipsum is
-          that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here',
-          making it look like readable English. Many desktop publishing packages and web page editors now use Lorem
-          Ipsum as their default model text, and a search for 'lo
-        </span>
+        <span class="text-14">{{listHotel &&listHotel.about}}</span>
       </div>
     </div>
     <!-- end about -->
@@ -190,10 +166,10 @@
               <span class="text-14">Address: 3 No , 270 streets, Siem Reab , Cambodia</span>
             </div>
             <div class="my-2">
-              <span class="text-14">Phone: 09292929211111</span>
+              <span class="text-14">Phone: {{listHotel &&listHotel.contact}}</span>
             </div>
             <div class="my-2">
-              <span class="text-14">website : abc.com</span>
+              <span class="text-14">website : <a :href="listHotel &&listHotel.website">{{listHotel &&listHotel.website}}</a></span>
             </div>
           </div>
         </div>
@@ -207,7 +183,8 @@
             <hr style="height: 2px" />
 
             <div>
-              <img :src="mapImage" alt="map" style="width: 100% max-height: 450px;" />
+              
+              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3908.9961863424714!2d104.9341071148078!3d11.552130691798002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x310951b90a43e133%3A0xff95e79b162ab017!2sThe%20Bridge!5e0!3m2!1sen!2skh!4v1643052597745!5m2!1sen!2skh" width="300" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
             </div>
           </div>
         </div>
@@ -436,7 +413,7 @@
             <!-- end comment -->
           </div>
         </div>
-        <div></div>
+
       </div>
     </div>
     <!-- end rates & reviews -->
@@ -444,6 +421,7 @@
 </template>
 
 <script>
+import listOneHotelByID from '../firebase/listOneHotel'
 export default {
   name: 'DetailPage',
 
@@ -457,6 +435,7 @@ export default {
     gymImage: require('../assets/detail_page/gym.png'),
     mapImage: require('../assets/detail_page/map.png'),
     imageMargin: null,
+    listHotel:null,
   }),
 
   created() {
@@ -464,6 +443,14 @@ export default {
       if (window.innerWidth < 992) this.imageMargin = true
       else this.imageMargin = false
     })
+  },
+  computed:{
+    router(){
+      return this.$route.params.id
+    }
+  },
+  async mounted() {
+    this.listHotel = await listOneHotelByID(this.router)
   },
 }
 </script>
@@ -495,5 +482,8 @@ export default {
   border-radius: 10px;
   background-color: #222831;
   color: white;
+}
+.px-5{
+  margin: 50px 25px;
 }
 </style>
