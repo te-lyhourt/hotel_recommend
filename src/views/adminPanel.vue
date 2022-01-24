@@ -172,7 +172,8 @@
     export default {
         data() {
             return {
-                listHotels: null
+                listHotels: null,
+                sortByProvince:"All",
             }
         },
         setup() {
