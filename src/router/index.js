@@ -5,6 +5,7 @@ import loginAdmin from '../views/loginAdmin.vue'
 import adminPanel from '../views/adminPanel.vue'
 import createPage from '../views/createPage.vue'
 import loginPage from '../views/loginPage.vue'
+import {auth} from '../firebase/config'
 const routes=[
     {
         path:'/',
@@ -37,10 +38,18 @@ const routes=[
         name: 'loginPage',
         component: loginPage
     }
+
 ]
 
 const router = createRouter({
     history:createWebHistory(),
     routes
 });
+router.beforeEach((to,from,next)=>{
+    setTimeout(()=>{
+        if(to.path.includes('admin')&&!auth.currentUser.email=='admin@admin.com') next({path:'/login-page'})
+        else if(to.path.includes('login')&&auth.currentUser=='admin@admin.com') next({path:'/admin/admin-panel'})
+        else next()
+    },1000)
+})
 export default router;

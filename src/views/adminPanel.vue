@@ -14,9 +14,9 @@
                         <h4>Awesome<span>logo</span></h4>
                     </a>
                     
-                    <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
+                    <input v-model="hotelName" type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
                         aria-describedby="search-addon" style="margin: 0 0 0 5rem"/>
-                    <button type="button" class="btn btn-primary">search</button>
+                    <button @click="searchHotel" type="button" class="btn btn-primary">search</button>
                 </div>
                 <div class="navbar-menu" id="open-navbar1">
                     <ul class="navbar-nav">
@@ -48,7 +48,7 @@
                                 <li><a href="#">One more seprated link.</a></li>
                             </ul>
                         </li> -->
-                        <li style="padding: 0 3rem"><a href="#"><i class="fas fa-sign-out-alt"></i></a></li>
+                        <li @click="logOut" style="padding: 0 3rem; cursor:pointer"><i class="fas fa-sign-out-alt"></i></li>
                     </ul>
                 </div>
             </div>
@@ -59,15 +59,36 @@
                 <a href="/admin/create-hotel" type="button" class="btn btn-primary"  style="background-color: #00ADB5;"><i class="fas fa-plus"></i> Add
                     Hotel</a>
                 <!-- <button type="button" class="btn btn-primary pull-right"> Sort by</button> -->
-                <button type="button" class="btn btn-primary pull-right"> <i class="fas fa-calendar-day"></i>
-                    Date</button>
+                <button type="button" class="btn btn-primary pull-right"> <i class="fas fa-calendar-day"></i> Date</button>
                 
                     
-                    <select name="" id=""  class="btn btn-primary pull-right" style="background-color: #00ADB5;">
-                        <option value="All">All</option>
-                        <option value="Phnom Penh">Phnom Penh</option>
-                        <option value="Battambong">Battambong</option>
-                        <option value="Siem Rieab">Siem Rieab</option>
+                    <select v-model="sortByProvince" id=""  class="btn btn-primary pull-right text-start " style="background-color: #00ADB5;padding:7px">
+                        <option value="">All</option>
+                        <option value="01">Banteay Meanchey</option>
+                        <option value="02">Battambang</option>
+                        <option value="03">Kampong Cham</option>
+                        <option value="04">Kampong Chhnang</option>
+                        <option value="05">Kampong Speu</option>
+                        <option value="06">Kampong Thom</option>
+                        <option value="07">Kampot</option>
+                        <option value="08">Kandal</option>
+                        <option value="09">Koh Kong</option>
+                        <option value="10">Kratie</option>
+                        <option value="11">Mondul Kiri</option>
+                        <option value="12">Phnom Penh</option>
+                        <option value="13">Preah Vihear</option>
+                        <option value="14">Prey Veng</option>
+                        <option value="15">Pursat</option>
+                        <option value="16">Ratanak Kiri</option>
+                        <option value="17">Siemreap</option>
+                        <option value="18">Preah Sihanouk</option>
+                        <option value="19">Stung Treng</option>
+                        <option value="20">Svay Rieng</option>
+                        <option value="21">Takeo</option>
+                        <option value="22">Oddar Meanchey</option>
+                        <option value="23">Kep</option>
+                        <option value="24">Pailin</option>
+                        <option value="25">Tboung Khmum</option>
                     </select>
                 
                 
@@ -167,23 +188,46 @@
     </body>
 </template>
 <script>
+    import sortHotel from '../firebase/sortByProvince'
     import listHotels from '../firebase/listHotel'
     import deletedHotel from '../firebase/deletedHotel'
+    import userAuth from '../firebase/auth'
+    import searchedHotel from '../firebase/searchHotel'
     export default {
         data() {
             return {
                 listHotels: null,
-                sortByProvince:"All",
+                sortByProvince:"",
+                hotelName:null,
             }
         },
         setup() {
 
         },
+        watch:{
+            async sortByProvince(){
+                let hotel = await sortHotel(this.sortByProvince)
+                this.listHotels=hotel
+            }
+        },
         methods: {
             async deletedHotel(id) {
                 this.listHotels = await deletedHotel(id)
                 console.log(this.listHotels);
+            },
+            async logOut(){
+                console.log('hi');
+                let isLogout = await userAuth('signout')
+                if(!isLogout){
+                    
+                    this.$router.push('/login-page')
+                }
+            },
+            async searchHotel(){
+                let hotel = await searchedHotel(this.hotelName)
+                this.listHotels=hotel
             }
+
         },
         async mounted() {
             this.listHotels = await listHotels()
