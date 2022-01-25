@@ -26,7 +26,7 @@
   </div>
 </template>
 <script>
-import logo from "../../assets/detail_page/login-logo.jpg";
+import logo from "../../assets/loginlogo.png";
 import SearchBar from "./searchBar.vue";
 import profile from "./profile.vue";
 import userAuth from "../../firebase/auth";
