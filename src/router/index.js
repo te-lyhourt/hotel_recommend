@@ -47,9 +47,12 @@ const router = createRouter({
 });
 router.beforeEach((to,from,next)=>{
     setTimeout(()=>{
-        if(to.path.includes('admin')&&!auth.currentUser.email=='admin@admin.com') next({path:'/login-page'})
-        else if(to.path.includes('login')&&auth.currentUser=='admin@admin.com') next({path:'/admin/admin-panel'})
-        else next()
-    },1000)
+        if(to.path.includes('admin')&&!auth.currentUser) {
+            next({path:'/login-page'})
+        }
+        else {
+            next()
+        }
+    },700)
 })
 export default router;
