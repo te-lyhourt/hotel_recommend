@@ -46,6 +46,7 @@ const router = createRouter({
     routes
 });
 router.beforeEach((to,from,next)=>{
+
     setTimeout(()=>{
         if(to.path.includes('admin')&&!auth.currentUser) {
             next({path:'/login-page'})
