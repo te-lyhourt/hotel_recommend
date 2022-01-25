@@ -4,16 +4,9 @@
         <nav class="navbar">
             <div class="container-fluid">
                 <div class="navbar-header" style="padding: 0 3rem">
-                    
-                    <button class="navbar-toggler" data-toggle="open-navbar1">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </button>
-                    <a href="#">
-                        <h4>Awesome<span>logo</span></h4>
+                    <a href="/" class="w-25">
+                        <img :src="require('../assets/loginlogo.png')" class="rounded float-start w-50" alt="...">
                     </a>
-                    
                     <input v-model="hotelName" type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
                         aria-describedby="search-addon" style="margin: 0 0 0 5rem"/>
                     <button @click="searchHotel" type="button" class="btn btn-primary">search</button>
@@ -184,6 +177,7 @@
                     </li>
                 </ul>
             </nav>
+            
         </div>
     </body>
 </template>
