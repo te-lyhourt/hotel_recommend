@@ -1,14 +1,13 @@
-<template >
-    <div>
-        <a href="/">Home</a>
+<template v-html="html">
+    <div class="container">
+        <a class="brand" href="/">
+            
+        </a>
     </div>
 </template>
 <script>
-
-export default {
-
-}
+export default {};
 </script>
-<style >
-    
+<style scoped>
+
 </style>

@@ -34,7 +34,6 @@ export default async function userAuth(type,data) {
     else if(type=='signout'){
         await signOut(auth)
         return false
-        
     }
     
 }
