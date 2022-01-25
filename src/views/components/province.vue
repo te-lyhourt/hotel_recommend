@@ -1,6 +1,6 @@
 <template >
   <div class="province">
-    <select v-model="sortProvince" name="province">
+    <select v-model="sortProvince" name="province" @change="sendProvince($event)">
       <option value="">All</option>
       <option value="01">Banteay Meanchey</option>
       <option value="02">Battambang</option>
@@ -31,19 +31,19 @@
   </div>
 </template>
 <script>
-import sortHotel from '../../firebase/sortByProvince'
+
 export default {
   data(){
     return{
       sortProvince:''
     }
   },
-  watch:{
-    async sortProvince(){
-        let hotel = await sortHotel(this.sortProvince)
-        console.log(hotel);
+  methods: {
+    sendProvince(event){
+      this.$emit('haveProvince',event.target.value)
     }
-  }
+  },
+
 };
 </script>
 <style scoped>
@@ -52,5 +52,6 @@ export default {
     justify-content: center;
     margin-bottom: 15px;
     margin-left: 35px;
+    font-size: 16px;
 }
 </style>

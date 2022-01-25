@@ -30,10 +30,10 @@
               <!-- v-model="searchValue" -->
     </div>
 
-    <a @click="cancel"
+    <!-- <a @click="cancel"
     
       ><i class="fas fa-times" aria-hidden="true" ></i
-    ></a>
+    ></a> -->
     <!-- v-if="searchValue" -->
   </div>
 </template>

@@ -17,5 +17,13 @@ html {
   background-color: #393E46;
   
 }
-
+.white-text {
+  font-style: italic;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 16px;
+  color: #ffffff;
+  margin: 0px;
+  margin-top: 20px;
+}
 </style>

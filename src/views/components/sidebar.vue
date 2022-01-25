@@ -3,7 +3,7 @@
     <p class="title filter">Filter</p>
     <hr class="line" />
     <p class="title">Province</p>
-    <province></province>
+    <province @haveProvince='getProvince'></province>
     <hr class="line" />
     <p class="title">Prince</p>
     <div class="price-group">
@@ -74,6 +74,9 @@ export default {
     async sortByPrice(startPrice,endPrice){
         let hotels = await sortByPrice(startPrice,endPrice)
         console.log(hotels);
+    },
+    getProvince(value){
+      this.$emit('haveProvince',value)
     }
   }
 };
