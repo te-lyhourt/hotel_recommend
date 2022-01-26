@@ -48,7 +48,7 @@
         </nav>
 
         <div class="container-fluid" style="padding: 0 5rem">
-            <div style="padding-bottom: 1.5rem">
+            <div style="padding-bottom: 1.5rem; padding-top: 1.5rem">
                 <a href="/admin/create-hotel" type="button" class="btn btn-primary"  style="background-color: #00ADB5;"><i class="fas fa-plus"></i> Add
                     Hotel</a>
                 <!-- <button type="button" class="btn btn-primary pull-right"> Sort by</button> -->
@@ -471,5 +471,14 @@
 
     button {
         background-color: #00ADB5;
+        font-size: 1.7rem;
+    }
+
+    a {
+        font-size: 1.7rem;
+    }
+
+    select {
+        font-size: 1.4rem;
     }
 </style>
