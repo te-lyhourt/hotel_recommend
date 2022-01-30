@@ -96,11 +96,13 @@ export default {
 }
 .hotel_price {
   font-size: 18px;
+  margin-bottom: 10px;
 }
 .hotel_row {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   background: #222831;
   margin-bottom: 25px;
+  text-decoration: none;
 }
 </style>

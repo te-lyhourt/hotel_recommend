@@ -2,7 +2,7 @@
     <div>
         <topbar @search='getSearchName'></topbar>
         <div class="content">
-            <sidebar @haveProvince='getProvince'></sidebar>
+            <sidebar @haveProvince='getProvince' v-if="listHotels"></sidebar>
             <div class="hotel_container" >
                 <hotelRow v-for="listHotel in listHotels" :key="listHotel.uid" :listHotel="listHotel"></hotelRow>
             </div>

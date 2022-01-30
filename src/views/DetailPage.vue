@@ -59,7 +59,7 @@
               <div class="col-12 col-sm-12 col-md-9 col-lg-9 col-xl-9">
                 <img
                   :src="listHotel && listHotel.images[0]"
-                  style="width: 100%; height: 100%; padding: 0"
+                  class="mainimage"
                   alt=""
                 />
               </div>
@@ -611,5 +611,9 @@ export default {
 .px-5 {
   margin: 0 45px;
   margin-top: 40px;
+}
+.mainimage{
+  width: 100%;
+  height: 400px;
 }
 </style>
