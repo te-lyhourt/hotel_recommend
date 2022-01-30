@@ -3,8 +3,27 @@
     <p class="title filter">Filter</p>
     <hr class="line" />
     <p class="title">Province</p>
-    <province @haveProvince='getProvince'></province>
+    <province @haveProvince="getProvince"></province>
+
     <hr class="line" />
+    <p class="title">Star</p>
+    <div class="price-group">
+      <select
+        v-model="startLevel"
+        name="province"
+        @change="sendStar()"
+        class="star"
+      >
+        <option value="">All</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+      </select>
+    </div>
+
+    <!-- <hr class="line" />
     <p class="title">Prince</p>
     <div class="price-group">
       <div class="flex-box">
@@ -19,66 +38,66 @@
       <div class="flex-box">
         <button type="button" class="title filter-btn">Above 100$</button>
       </div>
-    </div>
-    
-    <hr class="line" />
+    </div> -->
+
+    <!-- <hr class="line" />
     <p class="title">Rating</p>
-        <div class="price-group">
+    <div class="price-group">
       <div class="flex-box">
         <button type="button" class="title filter-btn flex-center">
-            <i class="bi bi-star-fill"></i>
-            <i class="bi bi-star-fill"></i>
-            <i class="bi bi-star-fill"></i>
-            <i class="bi bi-star-fill"></i>
-            <div class="andUp">
-                & up
-            </div>
+          <i class="bi bi-star-fill"></i>
+          <i class="bi bi-star-fill"></i>
+          <i class="bi bi-star-fill"></i>
+          <i class="bi bi-star-fill"></i>
+          <div class="andUp">& up</div>
         </button>
       </div>
       <div class="flex-box">
         <button type="button" class="title filter-btn flex-center">
-            <i class="bi bi-star-fill"></i>
-            <i class="bi bi-star-fill"></i>
-            <i class="bi bi-star-fill"></i>
-            <div class="andUp">
-                & up
-            </div>
+          <i class="bi bi-star-fill"></i>
+          <i class="bi bi-star-fill"></i>
+          <i class="bi bi-star-fill"></i>
+          <div class="andUp">& up</div>
         </button>
       </div>
       <div class="flex-box">
         <button type="button" class="title filter-btn flex-center">
-            <i class="bi bi-star-fill"></i>
-            <i class="bi bi-star-fill"></i>
-            <div class="andUp">
-                & up
-            </div>
+          <i class="bi bi-star-fill"></i>
+          <i class="bi bi-star-fill"></i>
+          <div class="andUp">& up</div>
         </button>
       </div>
       <div class="flex-box">
         <button type="button" class="title filter-btn flex-center">
-            <i class="bi bi-star-fill"></i>
-            <div class="andUp">
-                & up
-            </div>
+          <i class="bi bi-star-fill"></i>
+          <div class="andUp">& up</div>
         </button>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 <script>
 import province from "./province.vue";
-import sortByPrice from '../../firebase/sortByPrice'
+import sortByPrice from "../../firebase/sortByPrice";
 export default {
   components: { province },
-  methods:{
-    async sortByPrice(startPrice,endPrice){
-        let hotels = await sortByPrice(startPrice,endPrice)
-        console.log(hotels);
+  data() {
+    return {
+      startLevel: "",
+    };
+  },
+  methods: {
+    async sortByPrice(startPrice, endPrice) {
+      let hotels = await sortByPrice(startPrice, endPrice);
+      console.log(hotels);
     },
-    getProvince(value){
-      this.$emit('haveProvince',value)
-    }
-  }
+    getProvince(value) {
+      this.$emit("haveProvince", value);
+    },
+    sendStar() {
+      this.$emit("haveStar", this.startLevel);
+    },
+  },
 };
 </script>
 <style>
@@ -101,10 +120,10 @@ export default {
   margin-left: 10px;
   color: white;
 }
-.filter{
-    font-size: 22px;
-    margin: 0;
-    margin-left: 10px;
+.filter {
+  font-size: 22px;
+  margin: 0;
+  margin-left: 10px;
 }
 .line {
   opacity: unset;
@@ -126,20 +145,32 @@ export default {
   color: #00adb5;
   background: white;
 }
-.flex-box{
-    display: flex;
-    justify-content: center;
+.flex-box {
+  display: flex;
+  justify-content: center;
 }
-.flex-center{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.bi-star-fill{
-    color: #FFB600;
+.bi-star-fill {
+  color: #ffb600;
 }
-.andUp{
-    white-space: nowrap;
-    margin-left: 3px;
+.andUp {
+  white-space: nowrap;
+  margin-left: 3px;
+}
+.select {
+  border-radius: 5px;
+  padding: 3px 5px;
+}
+.star {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px;
+  margin-left: 60px;
+  font-size: 16px;
+  width: 160px;
 }
 </style>

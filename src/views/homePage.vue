@@ -1,69 +1,80 @@
 <template>
-    <div>
-        <topbar @search='getSearchName'></topbar>
-        <div class="content">
-            <sidebar @haveProvince='getProvince' v-if="listHotels"></sidebar>
-            <div class="hotel_container" >
-                <hotelRow v-for="listHotel in listHotels" :key="listHotel.uid" :listHotel="listHotel"></hotelRow>
-            </div>
- 
-
-        </div>
-
+  <div>
+    <topbar @search="getSearchName"></topbar>
+    <div class="content">
+      <sidebar
+        @haveStar="getStar"
+        @haveProvince="getProvince"
+        v-if="listHotels"
+      ></sidebar>
+      <div class="hotel_container">
+        <hotelRow
+          v-for="listHotel in listHotels"
+          :key="listHotel.uid"
+          :listHotel="listHotel"
+        ></hotelRow>
+      </div>
     </div>
+  </div>
 </template>
 
 <script>
-import listHotels from '../firebase/listHotel'
-import Sidebar from './components/sidebar.vue'
-import topbar from './components/topbar.vue'
-import hotelRow from './components/hotelRow'
-import sortHotel from '../firebase/sortByProvince'
-import searchedHotel from '../firebase/searchHotel'
+import listHotels from "../firebase/listHotel";
+import Sidebar from "./components/sidebar.vue";
+import topbar from "./components/topbar.vue";
+import hotelRow from "./components/hotelRow";
+import sortHotel from "../firebase/sortByProvince";
+import searchedHotel from "../firebase/searchHotel";
+import sortByStar from "../firebase/sortByStar";
 
 export default {
-    data() {
-        return {
-            listHotels: null,
-            sortByProvince:"",
-            hotelName:null,
-        }
+  data() {
+    return {
+      listHotels: null,
+      hotelName: null,
+    };
+  },
+
+  components: { topbar, Sidebar, hotelRow },
+  async mounted() {
+    this.listHotels = await listHotels();
+    console.log(this.listHotels);
+  },
+  methods: {
+    async getProvince(value) {
+      if (value == "") {
+        this.listHotels = await listHotels();
+      } else {
+        let hotel = await sortHotel(value);
+        this.listHotels = hotel;
+      }
     },
-    watch:{
-        async sortByProvince(){
-            let hotel = await sortHotel(this.sortByProvince)
-            this.listHotels=hotel
-            if(this.sortByProvince==""){
-                this.listHotels = await listHotels()
-            }
-        }
+    async getStar(value) {
+      console.log("get call");
+      if (value == "") {
+        console.log("get call");
+        this.listHotels = await listHotels();
+      } else {
+        let hotel = await sortByStar(value);
+        this.listHotels = hotel;
+      }
     },
-    components: { topbar, Sidebar ,hotelRow},
-    async mounted() {
-        this.listHotels = await listHotels()
-        console.log(this.listHotels);
+    async getSearchName(value) {
+      this.hotelName = value;
+      let hotel = await searchedHotel(this.hotelName);
+      console.log(hotel);
+      this.listHotels = hotel;
     },
-    methods: {
-        getProvince(value){
-            this.sortByProvince = value
-        },
-        async getSearchName(value){
-            this.hotelName = value
-            let hotel = await searchedHotel(this.hotelName)
-            console.log(hotel)
-            this.listHotels = hotel
-        },
-    },
-}
+  },
+};
 </script>
 <style scoped>
-.content{
-    display: flex;
-    justify-content: center;
+.content {
+  display: flex;
+  justify-content: center;
 }
 .hotel_container {
   margin-top: 100px;
   margin-left: 35px;
 }
-
 </style>
