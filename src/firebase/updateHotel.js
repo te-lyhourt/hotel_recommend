@@ -13,9 +13,7 @@ export default async function updatedHotel(id,data) {
         stars: data.stars,
         about: data.about,
         roomTypes:data.roomTypes,
-        services: data.services,
-        images: data.images,        //store array of image url
-        comments: []
+        services: data.services,       //store array of image url
     }).then(()=>{
         return "Updated Success!"
     }).catch(err=>{

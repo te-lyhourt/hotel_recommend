@@ -126,7 +126,7 @@
                         <td v-if="hotel.data.province==23">Kep</td>
                         <td v-if="hotel.data.province==24">Pailin</td>
                         <td v-if="hotel.data.province==25">Tboung Khmum</td>
-                        <td>{{hotel.data.rating.length>0?hotel.data.rating:0}}</td>
+                        <td>{{hotel.data.rating.total}}</td>
                         <td>
                             <div class="btn-group">
                                 <a :href="'/admin/'+hotel.uid" class="btn btn-primary" style="background-color: #00ADB5;"><i class="fas fa-pen"></i>

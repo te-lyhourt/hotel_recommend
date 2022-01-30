@@ -54,6 +54,6 @@ router.beforeEach((to,from,next)=>{
         else {
             next()
         }
-    },700)
+    },1000)
 })
 export default router;
