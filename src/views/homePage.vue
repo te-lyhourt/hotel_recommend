@@ -1,6 +1,6 @@
 <template>
     <div>
-        <topbar></topbar>
+        <topbar @search='getSearchName'></topbar>
         <div class="content">
             <sidebar @haveProvince='getProvince'></sidebar>
             <div class="hotel_container" >
@@ -19,12 +19,14 @@ import Sidebar from './components/sidebar.vue'
 import topbar from './components/topbar.vue'
 import hotelRow from './components/hotelRow'
 import sortHotel from '../firebase/sortByProvince'
+import searchedHotel from '../firebase/searchHotel'
 
 export default {
     data() {
         return {
             listHotels: null,
             sortByProvince:"",
+            hotelName:null,
         }
     },
     watch:{
@@ -44,7 +46,13 @@ export default {
     methods: {
         getProvince(value){
             this.sortByProvince = value
-        }
+        },
+        async getSearchName(value){
+            this.hotelName = value
+            let hotel = await searchedHotel(this.hotelName)
+            console.log(hotel)
+            this.listHotels = hotel
+        },
     },
 }
 </script>

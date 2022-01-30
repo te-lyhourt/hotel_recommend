@@ -210,11 +210,11 @@
 
       <!-- Contact & location -->
       <div id="contactandlocation" class="mt-3">
-        <div class="row">
+        <div class="row" style="background: #222830; border-radius: 10px">
           <div
             class="col-12 col-sm-12 col-md-11 col-lg-7 col-xl-7 mx-auto mt-2"
           >
-            <div class="card room-type-card px-4 py-4" style="height: 400px">
+            <div class="card room-type-card px-4 py-4" >
               <div class="text-left">
                 <span class="text-24"> Contact Information </span>
               </div>
@@ -608,7 +608,7 @@ export default {
 /* .px-5{
   margin: 50px 25px;
 } */
-.px-5{
+.px-5 {
   margin: 0 45px;
   margin-top: 40px;
 }
