@@ -13,10 +13,7 @@
         </div>
         <div class="navbar-menu" id="open-navbar1">
           <ul class="navbar-nav">
-            <li
-              @click="logOut"
-              class="logout"
-            >
+            <li @click="logOut" class="logout">
               <i class="fas fa-sign-out-alt"></i>
             </li>
           </ul>
@@ -107,24 +104,29 @@
                 class="d-flex justify-content-between align-items-center mb-3"
               >
                 <!-- <input :id="'Bed'+(i+1)" type="text" class="w-25" placeholder="Bed"> -->
+                <input
+                  type="text"
+                  class="w-25 m-0"
+                  placeholder="Room Name"
+                  :id="'roomName' + i"
+                />
                 <select
                   name="bed"
                   :id="'Bed' + i"
-                  class="w-25"
-                  style="padding: 9px"
+                  class="bed"
                 >
                   <option value="" hidden>Bed</option>
                   <option value="1">1</option>
                   <option value="2">2</option>
                   <option value="3">3</option>
                   <option value="4">4</option>
-                  <option value="Family">Family</option>
+                  <option value="5">5</option>
                 </select>
                 <input
                   :id="'Price' + i"
-                  type="text"
+                  type="number"
                   class="w-25 m-0"
-                  placeholder="Price"
+                  placeholder="Price in $"
                 />
                 <select
                   name="optional"
@@ -379,10 +381,12 @@ export default {
         let quantityOfBed = document.getElementById("Bed" + i).value;
         let price = document.getElementById("Price" + i).value;
         let optional = document.getElementById("Optional" + i).value;
+        let roomName = document.getElementById("roomName" + i).value;
         var objectRoom = {
           bed: quantityOfBed,
           price: price,
           optional: optional,
+          roomName: roomName,
         };
         this.form.roomTypes.push(objectRoom);
       }
@@ -394,6 +398,7 @@ export default {
         this.isSuccess = modelHotel(this.form);
         if (this.isSuccess) {
           this.form = resetData();
+          document.getElementById("roomName1").value = null;
           document.getElementById("img").value = null;
           this.roomType = 1;
           document.getElementById("Bed1").value = null;
@@ -455,7 +460,6 @@ body {
   font-family: "Roboto", sans - serif;
   overflow-x: hidden;
   background-color: #393e46;
-
 }
 .row {
   display: -ms-flexbox; /* IE10 */
@@ -476,7 +480,7 @@ body {
   padding: 0 16px;
   color: white;
 }
-input[type="text"] {
+input {
   width: 100%;
   margin-bottom: 5px;
   padding: 8px;
@@ -800,9 +804,13 @@ p.service {
   margin-top: 5px;
   font-size: 12px;
 }
-.logout{
+.logout {
   padding: 0px 3rem;
   cursor: pointer;
   font-size: 25px;
+}
+.bed {
+  width: 63px;
+  padding: 9px 0;
 }
 </style>
