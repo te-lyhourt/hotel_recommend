@@ -8,13 +8,13 @@
           </a>
         </div>
       </div>
-      <div class="flex-center">
+      <div class="flex-center cont">
         <div class="saerch">
-          <search-bar></search-bar>
+          <search-bar @search='getName'></search-bar>
         </div>
         <div class="" v-if="isLogin">
           <profile :src="user.photoURL" />
-          <button class="filter-btn title" @click="signOut">
+          <button class="filter-btn title" @click="signOut" style="margin-left: 20px;">
             Sign Out
           </button>
         </div>
@@ -56,6 +56,9 @@ export default {
       this.user = auth.currentUser;
       console.log(this.user);
     },
+    getName(value){
+      this.$emit('search',value)
+    }
   },
   mounted() {
     this.user = auth.currentUser;
@@ -63,6 +66,7 @@ export default {
 };
 </script>
 <style scoped>
+
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -128,10 +132,14 @@ input:focus {
     flex-direction: row;
     align-items: center;
   }
+
 }
 @media only screen and (max-width: 992px) {
   .big-content {
     flex-direction: column;
+  }
+  .cont{
+    margin-bottom: 10px;
   }
 }
 

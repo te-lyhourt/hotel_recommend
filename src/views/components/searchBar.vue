@@ -1,124 +1,49 @@
 <template>
-  <div class="form-group">
-    <!-- <select
-      class="select"
-      id="resizing_select"
-      v-model="categoryID"
-      @change="resize"
-    >
-      <option value="all" hidden>ទាំងអស់</option>
-      <option v-for="main in mainCategory" :key="main.id" :value="main.id">
-        {{ main.brand_kh }}
-      </option>
-    </select>
-    <select id="width_tmp_select">
-      <option id="width_tmp_option"></option>
-    </select> -->
-
-    <a @click="search" class="search"
-      ><i class="fa fa-search" aria-hidden="true"></i
-    ></a>
-
-    <div class="search">
-      <input
-
-        type="text"
-        class="search-input"
-        placeholder="Search"
-        @keyup.enter="search"
-      />
-              <!-- v-model="searchValue" -->
+  <div class="flex-center ">
+    <a class="circle" href="/" v-if="showBack">
+      <i class="bi bi-arrow-left  arrow"></i>
+    </a>
+    <div class="form-group">
+      <div class="search">
+        <input
+          type="text"
+          class="search-input"
+          placeholder="Search"
+          @keyup.enter="search"
+          v-model="searchValue"
+          @focus="showBack=true"
+          @blur="showBack=false"
+        />
+      </div>
+      <a @click="search" class="search">
+        <i class="fa fa-search" aria-hidden="true"></i>
+      </a>
     </div>
-
-    <!-- <a @click="cancel"
-    
-      ><i class="fas fa-times" aria-hidden="true" ></i
-    ></a> -->
-    <!-- v-if="searchValue" -->
   </div>
 </template>
 <script>
-
 export default {
-//   props: ["searchVal", "catID"],
-//   async mounted() {
-//     const mainCategory = localStorage.getItem("mainCategory");
-//     if (mainCategory != undefined) {
-//       this.mainCategory = await JSON.parse(mainCategory);
-//       this.haveMain = true;
-//     } else {
-//       await this.getMaincategory();
-//     }
-//   },
-//   watch: {
-//     searchVal() {
-//       this.searchValue = this.searchVal;
-//     },
-//     catID() {
-//       this.categoryID = this.catID;
-//     },
-//   },
-//   data() {
-//     return {
-//       dropdown: false,
-//       searchValue: "",
-//       mainCategory: "",
-//       categoryID: "all",
-//     };
-//   },
-//   methods: {
-//     async resize() {
-//       $("#width_tmp_option").html($("#resizing_select option:selected").text());
-//       const width = $("#width_tmp_select").width();
-//       $("#resizing_select").width(width + 3);
-//     },
-//     getMaincategory() {
-//       console.log("get called");
-//       Axios.get(`/api/brands/tree/`).then((result) => {
-//         // console.log(result);
-//         const success = result.data.message;
-//         if (success) {
-//           const data = result.data.result;
-//           console.log(result);
-//           this.mainCategory = data;
-//           this.haveMain = true;
-//           localStorage.setItem(
-//             "mainCategory",
-//             JSON.stringify(this.mainCategory)
-//           );
-//         } else if (!success) {
-//           this.getMaincategory();
-//         }
-//       });
-//     },
-//     changeIcon() {
-//       var text = this.showText;
-//       this.showText = this.dropDownText;
-//       this.dropDownText = text;
-//     },
-//     search() {
-//       if (this.searchValue != "") {
-//         if (this.categoryID == "all") {
-//           this.$emit("search", "all", this.searchValue, this.categoryID);
-//         } else {
-//           this.$emit("search", "main", this.searchValue, this.categoryID);
-//         }
-//       }
-//     },
-//     cancel() {
-//       this.searchValue = "";
-//       this.$emit("cancel");
-//     },
-//   },
-//   computed: {
-//     showDropdown() {
-//       if (this.dropdown) return true;
-//       else return false;
-//     },
-//   },
+  data() {
+    return {
+      searchValue: "",
+      showBack:false
+    };
+  },
+  methods: {
+    search() {
+      if (this.searchValue != "") {
+        this.$emit("search", this.searchValue);
+      }
+    },
+    cancel() {
+      this.searchValue = "";
+      this.$emit("cancel");
+    },
+  },
 };
 </script>
 <style scoped>
+
 ul {
   padding: 0;
 }
@@ -199,7 +124,7 @@ a.search {
   display: flex;
   align-items: center;
   padding-left: 5px;
-  margin-left: 11px;
+  margin-right: 20px;
   /* border-left: 2px solid #f57168; */
   flex: 1;
 }
@@ -222,5 +147,19 @@ a .fa-times {
   .search-input {
     max-width: 110px;
   }
+}
+a.circle{
+  border-radius: 50%;
+  width: 40px;
+  display: flex;
+  justify-content: center;
+}
+a.circle:hover{
+  background-color: #3a3b3c;
+}
+.arrow{
+  color: #b7babe;
+  font-weight: 900;
+  font-size: 23px;
 }
 </style>
