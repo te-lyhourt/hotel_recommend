@@ -220,9 +220,9 @@
 
               <label for="">Service</label>
               <div class="service1">
-                <div class="row" style="text-align: center">
+                <div class="service-row" style="text-align: center">
                   <div class="column1">
-                    <i class="fas fa-wifi"></i>
+                    <i class="fas fa-wifi service-logo"></i>
                     <p for="" class="service">Free WIFI</p>
                     <div class="container1">
                       <input
@@ -234,7 +234,7 @@
                   </div>
 
                   <div class="column1">
-                    <i class="fad fa-spa"></i>
+                    <i class="fad fa-spa service-logo"></i>
                     <p for="" class="service">Spa</p>
                     <div class="container1">
                       <input v-model="form.services.spa" type="checkbox" />
@@ -242,7 +242,7 @@
                     </div>
                   </div>
                   <div class="column1">
-                    <i class="fas fa-utensils-alt"></i>
+                    <i class="fas fa-utensils-alt service-logo"></i>
                     <p class="service" for="">Food</p>
                     <div class="container1">
                       <input v-model="form.services.food" type="checkbox" />
@@ -251,9 +251,9 @@
                   </div>
                 </div>
 
-                <div class="row" style="text-align: center">
+                <div class="service-row" style="text-align: center">
                   <div class="column1">
-                    <i class="far fa-parking"></i>
+                    <i class="far fa-parking service-logo"></i>
                     <p for="" class="service">Parking</p>
                     <div class="container1">
                       <input v-model="form.services.parking" type="checkbox" />
@@ -261,7 +261,7 @@
                     </div>
                   </div>
                   <div class="column1">
-                    <i class="far fa-swimmer"></i>
+                    <i class="far fa-swimmer service-logo"></i>
                     <p for="">Pool</p>
                     <div class="container1">
                       <input v-model="form.services.pool" type="checkbox" />
@@ -269,7 +269,7 @@
                     </div>
                   </div>
                   <div class="column1">
-                    <i class="fal fa-dumbbell"></i>
+                    <i class="fal fa-dumbbell service-logo"></i>
                     <p for="">Gym</p>
                     <div class="container1">
                       <input v-model="form.services.gym" type="checkbox" />
@@ -386,7 +386,7 @@ export default {
           optional: optional,
           roomName: roomName,
         };
-        if (i == 1) this.form.hotelPrice = price;
+        if (i == 1) this.form.hotelPrice = parseInt(price);
         this.form.roomTypes.push(objectRoom);
       }
       this.form.urlImages = await uploadImgs(
@@ -424,9 +424,9 @@ export default {
           price: price,
           optional: optional,
         };
-        if (i == 1){
-          this.form.hotelPrice = price;
-        } 
+        if (i == 1) {
+          this.form.hotelPrice = parseInt(price);
+        }
         this.form.roomTypes.push(objectRoom);
       }
       let isSuccess = await updatedHotel(this.routes, this.form);
@@ -436,7 +436,6 @@ export default {
   async mounted() {
     if (!this.routes.includes("create")) {
       this.form = await listOneHotelByID(this.routes);
-      console.log(this.form);
       this.roomType = this.form.roomTypes.length;
       setTimeout(() => {
         this.form.roomTypes.forEach((data, i) => {
@@ -574,7 +573,9 @@ span.price {
   float: left;
   width: 33.33%;
   padding-top: 10px;
-  /* height: 300px; /* Should be removed. Only for demonstration */
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 }
 ::placeholder {
   color: white;
@@ -819,16 +820,23 @@ p.service {
   width: 63px;
   padding: 9px 0;
 }
-.image-container{
+.image-container {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
 }
-.form-container{
+.form-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
 .img-thumbnail {
   height: 108px;
   width: 100%;
+}
+.service-row{
+  display: flex;
+  align-items: center;
+}
+.service-logo{
+  font-size: 22px;
 }
 </style>

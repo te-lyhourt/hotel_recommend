@@ -3,7 +3,42 @@
     <p class="title filter">Filter</p>
     <hr class="line" />
     <p class="title">Province</p>
-    <province @haveProvince="getProvince"></province>
+    <div>
+      <div class="province">
+        <select
+          v-model="sortProvince"
+          name="province"
+          @change="getProvince()"
+        >
+          <option value="">All</option>
+          <option value="01">Banteay Meanchey</option>
+          <option value="02">Battambang</option>
+          <option value="03">Kampong Cham</option>
+          <option value="04">Kampong Chhnang</option>
+          <option value="05">Kampong Speu</option>
+          <option value="06">Kampong Thom</option>
+          <option value="07">Kampot</option>
+          <option value="08">Kandal</option>
+          <option value="09">Koh Kong</option>
+          <option value="10">Kratie</option>
+          <option value="11">Mondul Kiri</option>
+          <option value="12">Phnom Penh</option>
+          <option value="13">Preah Vihear</option>
+          <option value="14">Prey Veng</option>
+          <option value="15">Pursat</option>
+          <option value="16">Ratanak Kiri</option>
+          <option value="17">Siemreap</option>
+          <option value="18">Preah Sihanouk</option>
+          <option value="19">Stung Treng</option>
+          <option value="20">Svay Rieng</option>
+          <option value="21">Takeo</option>
+          <option value="22">Oddar Meanchey</option>
+          <option value="23">Kep</option>
+          <option value="24">Pailin</option>
+          <option value="25">Tboung Khmum</option>
+        </select>
+      </div>
+    </div>
 
     <hr class="line" />
     <p class="title">Star</p>
@@ -27,16 +62,49 @@
     <p class="title">Prince</p>
     <div class="price-group">
       <div class="flex-box">
-        <button @click="sortByPrice(0,20)" type="button" class="title filter-btn">Under $20</button>
+        <button
+          @click="sortByPrice(0, 0, (type = 'all'))"
+          type="button"
+          class="title filter-btn"
+        >
+          All
+        </button>
       </div>
       <div class="flex-box">
-        <button @click="sortByPrice(20,50)" type="button" class="title filter-btn">20$-50$</button>
+        <button
+          @click="sortByPrice(0, 20, (type = 'under'))"
+          type="button"
+          class="title filter-btn"
+        >
+          Under $20
+        </button>
       </div>
       <div class="flex-box">
-        <button @click="sortByPrice(51,100)" type="button" class="title filter-btn">51$-100$</button>
+        <button
+          @click="sortByPrice(20, 50)"
+          type="button"
+          class="title filter-btn"
+        >
+          20$-50$
+        </button>
       </div>
       <div class="flex-box">
-        <button @click="sortByPrice(100,0)" type="button" class="title filter-btn">Above 100$</button>
+        <button
+          @click="sortByPrice(51, 100)"
+          type="button"
+          class="title filter-btn"
+        >
+          51$-100$
+        </button>
+      </div>
+      <div class="flex-box">
+        <button
+          @click="sortByPrice(0, 100, (type = 'above'))"
+          type="button"
+          class="title filter-btn"
+        >
+          Above 100$
+        </button>
       </div>
     </div>
 
@@ -77,25 +145,48 @@
   </div>
 </template>
 <script>
-import province from "./province.vue";
+
 import sortByPrice from "../../firebase/sortByPrice";
+import listHotels from "../../firebase/listHotel";
+import sortHotel from "../../firebase/sortByProvince";
 export default {
-  components: { province },
+
   data() {
     return {
       startLevel: "",
+      listHotel: null,
+      sortProvince:"",
     };
   },
   methods: {
-    async sortByPrice(startPrice, endPrice) {
-      let hotels = await sortByPrice(startPrice, endPrice);
-      console.log(hotels);
+    async sortByPrice(startPrice, endPrice, type) {
+      if (type == "all") {
+        let hotels = await listHotels();
+        this.listHotel = hotels;
+      } else {
+        let hotels = await sortByPrice(startPrice, endPrice, type);
+        this.listHotel = hotels;
+      }
+      this.snedChange();
     },
-    getProvince(value) {
-      this.$emit("haveProvince", value);
+    async getProvince() {
+      console.log(this.sortProvince)
+      console.log('change')
+      if (this.sortProvince == "") {
+        this.listHotel = await listHotels();
+      } else {
+        console.log('call')
+        let hotel = await sortHotel(this.sortProvince);
+        this.listHotel = hotel;
+        console.log(this.listHotel)
+      }
+      this.snedChange();
     },
     sendStar() {
       this.$emit("haveStar", this.startLevel);
+    },
+    snedChange() {
+      this.$emit("haveChange", this.listHotel);
     },
   },
 };
@@ -172,5 +263,12 @@ export default {
   margin-left: 60px;
   font-size: 16px;
   width: 160px;
+}
+.province{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+    margin-left: 35px;
+    font-size: 16px;
 }
 </style>

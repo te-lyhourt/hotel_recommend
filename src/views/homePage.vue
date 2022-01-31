@@ -4,7 +4,7 @@
     <div class="content">
       <sidebar
         @haveStar="getStar"
-        @haveProvince="getProvince"
+        @haveChange='getHotel'
         v-if="listHotels"
       ></sidebar>
       <div class="hotel_container">
@@ -23,7 +23,6 @@ import listHotels from "../firebase/listHotel";
 import Sidebar from "./components/sidebar.vue";
 import topbar from "./components/topbar.vue";
 import hotelRow from "./components/hotelRow";
-import sortHotel from "../firebase/sortByProvince";
 import searchedHotel from "../firebase/searchHotel";
 import sortByStar from "../firebase/sortByStar";
 
@@ -41,14 +40,14 @@ export default {
     console.log(this.listHotels);
   },
   methods: {
-    async getProvince(value) {
-      if (value == "") {
-        this.listHotels = await listHotels();
-      } else {
-        let hotel = await sortHotel(value);
-        this.listHotels = hotel;
-      }
-    },
+    // async getProvince(value) {
+    //   if (value == "") {
+    //     this.listHotels = await listHotels();
+    //   } else {
+    //     let hotel = await sortHotel(value);
+    //     this.listHotels = hotel;
+    //   }
+    // },
     async getStar(value) {
       console.log("get call");
       if (value == "") {
@@ -65,6 +64,10 @@ export default {
       console.log(hotel);
       this.listHotels = hotel;
     },
+    getHotel(value){
+      console.log(value)
+      this.listHotels = value
+    }
   },
 };
 </script>

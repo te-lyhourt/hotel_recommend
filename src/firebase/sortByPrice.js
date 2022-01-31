@@ -1,11 +1,18 @@
 import {db} from '../firebase/config'
 import { collection, query, where, getDocs } from "firebase/firestore";
-export default async function sortHotelByStar(startPrice,endPrice) {
-    console.log(startPrice)
-    console.log(endPrice)
-    let hotel=null
-    const q = query(collection(db, "Hotel"), where("roomTypes.0.price", ">=", 50));
+export default async function sortHotelByStar(startPrice,endPrice,type) {
 
+    let hotel=null
+    let q
+    if(type=='under'){
+        q = query(collection(db, "Hotel"), where("hotelPrice", "<", endPrice))
+    }
+    else if (type=='above'){
+        q = query(collection(db, "Hotel"), where("hotelPrice", ">", endPrice))
+    }
+    else{
+        q = query(collection(db, "Hotel"), where("hotelPrice", ">=", startPrice),where("hotelPrice", "<=", endPrice))
+    }
     const querySnapshot = await getDocs(q);
     hotel = new Promise(resolve=>{
         let datas=[]
@@ -15,5 +22,6 @@ export default async function sortHotelByStar(startPrice,endPrice) {
         });
         return resolve(datas)
     })
+    console.log(hotel)
     return hotel
 }
