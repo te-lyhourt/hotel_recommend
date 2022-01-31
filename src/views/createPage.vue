@@ -24,7 +24,7 @@
       <div class="container">
         <form id="formHotel">
           <p class="title">Create/Update Hotel Form</p>
-          <div class="row">
+          <div class="form-container">
             <div class="col-50">
               <label for="fname"> Hotel Name</label>
               <input
@@ -110,11 +110,7 @@
                   placeholder="Room Name"
                   :id="'roomName' + i"
                 />
-                <select
-                  name="bed"
-                  :id="'Bed' + i"
-                  class="bed"
-                >
+                <select name="bed" :id="'Bed' + i" class="bed">
                   <option value="" hidden>Bed</option>
                   <option value="1">1</option>
                   <option value="2">2</option>
@@ -211,16 +207,17 @@
               </div>
               <div v-else class="row mt-1" style="padding: 0 16px">
                 <label for="" class="p-0">Images</label>
-                <img
-                  v-for="(img, i) in form.images"
-                  :key="i"
-                  :src="img"
-                  class="img-thumbnail w-25"
-                  alt=""
-                />
+                <div class="image-container">
+                  <img
+                    v-for="(img, i) in form.images"
+                    :key="i"
+                    :src="img"
+                    class="img-thumbnail"
+                    alt=""
+                  />
+                </div>
               </div>
 
-              <br /><br /><br /><br /><br />
               <label for="">Service</label>
               <div class="service1">
                 <div class="row" style="text-align: center">
@@ -341,6 +338,7 @@ export default {
         province: "",
         stars: "",
         about: null,
+        hotelPrice: 0,
         roomTypes: [], // array
         services: {
           free_wifi: true,
@@ -349,7 +347,7 @@ export default {
           parking: true,
           pool: true,
           gym: true,
-        }, // array of object
+        }, // map of object
         urlImages: null,
       },
     };
@@ -388,13 +386,18 @@ export default {
           optional: optional,
           roomName: roomName,
         };
+        if (i == 1) this.form.hotelPrice = price;
         this.form.roomTypes.push(objectRoom);
       }
       this.form.urlImages = await uploadImgs(
         this.form.hotelName,
         this.form.urlImages
       );
-      if (this.form.urlImages.length > 0 && this.form.roomTypes.length > 0) {
+      console.log(this.form.roomTypes);
+      if (
+        this.form.urlImages.length > 0 &&
+        Object.keys(this.form.roomTypes).length > 0
+      ) {
         this.isSuccess = modelHotel(this.form);
         if (this.isSuccess) {
           this.form = resetData();
@@ -421,6 +424,9 @@ export default {
           price: price,
           optional: optional,
         };
+        if (i == 1){
+          this.form.hotelPrice = price;
+        } 
         this.form.roomTypes.push(objectRoom);
       }
       let isSuccess = await updatedHotel(this.routes, this.form);
@@ -812,5 +818,17 @@ p.service {
 .bed {
   width: 63px;
   padding: 9px 0;
+}
+.image-container{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+.form-container{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.img-thumbnail {
+  height: 108px;
+  width: 100%;
 }
 </style>

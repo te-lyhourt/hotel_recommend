@@ -3,6 +3,7 @@ import {addDoc, collection} from '@firebase/firestore'
 export default function modelHotel(data){
     addDoc(collection(db,'Hotel'),{
         hotelName: data.hotelName,
+        hotelPrice:data.hotelPrice,
         location: data.location,
         dateOfBuild: data.dateOfBuild,
         contact: data.contact,

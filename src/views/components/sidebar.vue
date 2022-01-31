@@ -23,22 +23,22 @@
       </select>
     </div>
 
-    <!-- <hr class="line" />
+    <hr class="line" />
     <p class="title">Prince</p>
     <div class="price-group">
       <div class="flex-box">
-        <button type="button" class="title filter-btn">Under $20</button>
+        <button @click="sortByPrice(0,20)" type="button" class="title filter-btn">Under $20</button>
       </div>
       <div class="flex-box">
-        <button type="button" class="title filter-btn">20$-50$</button>
+        <button @click="sortByPrice(20,50)" type="button" class="title filter-btn">20$-50$</button>
       </div>
       <div class="flex-box">
         <button @click="sortByPrice(51,100)" type="button" class="title filter-btn">51$-100$</button>
       </div>
       <div class="flex-box">
-        <button type="button" class="title filter-btn">Above 100$</button>
+        <button @click="sortByPrice(100,0)" type="button" class="title filter-btn">Above 100$</button>
       </div>
-    </div> -->
+    </div>
 
     <!-- <hr class="line" />
     <p class="title">Rating</p>

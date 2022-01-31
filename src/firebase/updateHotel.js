@@ -4,6 +4,7 @@ export default async function updatedHotel(id,data) {
     const frankDocRef = doc(db,'Hotel',id)
     const isUpdated = await updateDoc(frankDocRef,{
         hotelName: data.hotelName,
+        hotelPrice:data.hotelPrice,
         location: data.location,
         dateOfBuild: data.dateOfBuild,
         contact: data.contact,
