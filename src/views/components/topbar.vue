@@ -10,11 +10,15 @@
       </div>
       <div class="flex-center cont">
         <div class="saerch">
-          <search-bar @search='getName'></search-bar>
+          <search-bar @search="getName"></search-bar>
         </div>
         <div class="" v-if="isLogin">
-          <profile :src="user.photoURL" />
-          <button class="filter-btn title" @click="signOut" style="margin-left: 20px;">
+          <profile :src="user && user.photoURL" />
+          <button
+            class="filter-btn title"
+            @click="signOut"
+            style="margin-left: 20px"
+          >
             Sign Out
           </button>
         </div>
@@ -33,6 +37,7 @@ import userAuth from "../../firebase/auth";
 import { auth } from "../../firebase/config";
 
 export default {
+  props: ["userPass"],
   data() {
     return {
       isLogin: false,
@@ -44,21 +49,35 @@ export default {
     SearchBar,
     profile,
   },
+  watch: {
+    userPass() {
+      if (this.userPass != null) {
+        this.user = this.userPass;
+        this.isLogin = true;
+      }
+    },
+  },
   methods: {
     // signUp(){
     //     useAuth('signup')
     // },
     async signOut() {
+      console.log("get call");
       this.isLogin = await userAuth("signout");
+
+      this.$emit("userLogout");
+      console.log(this.isLogin);
     },
     async signIn() {
       this.isLogin = await userAuth("login");
       this.user = auth.currentUser;
-      console.log(this.user);
+      if (this.isLogin) {
+        this.$emit("userLogin", this.user);
+      }
     },
-    getName(value){
-      this.$emit('search',value)
-    }
+    getName(value) {
+      this.$emit("search", value);
+    },
   },
   mounted() {
     this.user = auth.currentUser;
@@ -66,7 +85,6 @@ export default {
 };
 </script>
 <style scoped>
-
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -132,13 +150,12 @@ input:focus {
     flex-direction: row;
     align-items: center;
   }
-
 }
 @media only screen and (max-width: 992px) {
   .big-content {
     flex-direction: column;
   }
-  .cont{
+  .cont {
     margin-bottom: 10px;
   }
 }

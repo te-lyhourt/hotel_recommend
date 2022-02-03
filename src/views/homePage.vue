@@ -65,7 +65,7 @@ export default {
       this.listHotels = hotel;
     },
     getHotel(value){
-      console.log(value)
+
       this.listHotels = value
     }
   },
