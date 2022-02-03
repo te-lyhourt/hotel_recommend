@@ -7,12 +7,12 @@
       <p class="white-text hotel_name">{{ listHotel && listHotel.data.hotelName }}</p>
       <p class="white-text">{{listHotel && listHotel.data.stars}}-star hotel</p>
       <div>
-        <!-- <p class="white-text">
+        <p class="white-text" v-if="listHotel.data.rating">
           Guest Rate:&nbsp;&nbsp;
-          <i class="bi bi-star-fill"></i>
-          <i class="bi bi-star-fill"></i>
-          <i class="bi bi-star-fill"></i>
-        </p> -->
+          <a v-for="n in listHotel.data.rating && listHotel.data.rating.total" :key="n">
+            <i class="bi bi-star-fill"></i>
+          </a>
+        </p>
       </div>
       <p class="white-text hotel_price">{{listHotel && listHotel.data.roomTypes[0].price}}$/night</p>
       <button class="filter-btn white-text">view detail</button>

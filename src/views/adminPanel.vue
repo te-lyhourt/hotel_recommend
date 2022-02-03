@@ -47,9 +47,9 @@
           ><i class="fas fa-plus"></i> Add Hotel</a
         >
         <!-- <button type="button" class="btn btn-primary pull-right"> Sort by</button> -->
-        <button type="button" class="btn btn-primary pull-right button">
+        <!-- <button type="button" class="btn btn-primary pull-right button">
           <i class="fas fa-calendar-day"></i> Date
-        </button>
+        </button> -->
 
         <select
           v-model="sortByProvince"
@@ -125,7 +125,7 @@
             <td v-if="hotel.data.province == 23">Kep</td>
             <td v-if="hotel.data.province == 24">Pailin</td>
             <td v-if="hotel.data.province == 25">Tboung Khmum</td>
-            <td>{{ hotel.data.rating.total }}</td>
+            <td>{{ hotel.data.rating && hotel.data.rating.total }}</td>
             <td>
               <div class="btn-group">
                 <a
@@ -200,7 +200,6 @@ export default {
       hotelName: null,
     };
   },
-  setup() {},
   watch: {
     async sortByProvince() {
       let hotel = await sortHotel(this.sortByProvince);
@@ -216,7 +215,7 @@ export default {
       console.log("hi");
       let isLogout = await userAuth("signout");
       if (!isLogout) {
-        this.$router.push("/login-page");
+        this.$router.push("/admin");
       }
     },
     async searchHotel() {

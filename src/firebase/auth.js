@@ -11,14 +11,10 @@ export default async function userAuth(type,data) {
         }
         
     }
-    // else if(type=='login'){
-    //     signInWithEmailAndPassword(auth,data.email, data.password).then(res=>{
-    //         console.log(res);
-    //     })
-    // }
     else if(type=='loginAdmin'){
         try {
             let userAdmin = await signInWithEmailAndPassword(auth,data.email,data.password)
+            localStorage.setItem('userAdmin',userAdmin)
             if(userAdmin.user){
                 return true
             }
@@ -32,6 +28,7 @@ export default async function userAuth(type,data) {
         // }
     }
     else if(type=='signout'){
+        localStorage.removeItem('userAdmin')
         await signOut(auth)
         return false
     }

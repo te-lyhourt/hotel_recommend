@@ -3,7 +3,7 @@ import {getDocs,where,query,collection } from '@firebase/firestore'
 
 export default async function listOneRating(hotel_id,user_id) {
     
-    let q = query(collection(db,"Rating"),where('hotel_id','==',hotel_id),where('user-id','==',user_id),limit(1))
+    let q = query(collection(db,"Rating"),where('hotel_id','==',hotel_id),where('user_id','==',user_id))
     const querySnapshot = await getDocs(q)
     let rating = null
 

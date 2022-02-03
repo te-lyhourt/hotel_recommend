@@ -839,4 +839,7 @@ p.service {
 .service-logo{
   font-size: 22px;
 }
+.fa-sign-out-alt{
+  font-size: 25px;
+}
 </style>

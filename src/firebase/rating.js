@@ -25,8 +25,8 @@ export default async function rating(stars, hotel_id, user_id, comments,photo,na
         else if (stars == 2) stars_2 = 1
         else if (stars == 1) stars_1 = 1
 
-        const frankDocRef = doc(db, 'Hotel', hotel_id)
-        await updateDoc(frankDocRef, {
+        const Hotel = doc(db, 'Hotel', hotel_id)
+        await updateDoc(Hotel, {
             isRating: true,
             rating: {
                 rateNum: 1,
@@ -55,8 +55,8 @@ export default async function rating(stars, hotel_id, user_id, comments,photo,na
 
         let rateNum = (stars_5+stars_4+stars_3+stars_2+stars_1)
         let total = Math.round(((stars_5*5)+(stars_4*4)+(stars_3*3)+(stars_2*2)+(stars_1*1))/rateNum)
-        const frankDocRef = doc(db, 'Hotel', hotel_id)
-        await updateDoc(frankDocRef, {
+        const Hotel = doc(db, 'Hotel', hotel_id)
+        await updateDoc(Hotel, {
             rating: {
                 rateNum: rateNum,
                 total: total,

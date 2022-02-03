@@ -41,9 +41,6 @@ export default {
             }
         }
     },
-    setup() {
-        
-    },
     methods:{
         async loginAdmin(){
             let admin = await userAuth('loginAdmin',this.form)

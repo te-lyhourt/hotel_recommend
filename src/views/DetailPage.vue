@@ -247,7 +247,11 @@
           </div>
 
           <div
-            class="col-12 col-sm-12 col-md-11 col-lg-5 col-xl-5 mx-auto comment-box"
+            class="
+              col-12 col-sm-12 col-md-11 col-lg-5 col-xl-5
+              mx-auto
+              comment-box
+            "
           >
             <div class="card room-type-card px-4 py-4" style="height: 400px">
               <div class="text-left">
@@ -276,7 +280,9 @@
           <div class="col-12 col-sm-12 col-md-11 col-lg-4 col-xl-4 mx-auto">
             <div class="card room-type-card px-4 py-4">
               <div class="text-left">
-                <span class="text-24"> {{listHotel && listHotel.rating.rateNum}} Rates </span>
+                <span class="text-24">
+                  {{ listHotel && listHotel.rating.rateNum }} Rates
+                </span>
               </div>
               <hr style="height: 2px" />
 
@@ -290,7 +296,7 @@
                       <div
                         class="progress-bar"
                         role="progressbar"
- :style="stars_5"
+                        :style="stars_5"
                         :aria-valuenow="listHotel && listHotel.rating.stars_5"
                         aria-valuemin="0"
                         :aria-valuemax="listHotel && listHotel.rating.rateNum"
@@ -299,7 +305,9 @@
                   </div>
                   <div class="col-3 mx-auto">
                     <div>
-                      <span class="text-14">{{listHotel && listHotel.rating.stars_5}}</span>
+                      <span class="text-14">{{
+                        listHotel && listHotel.rating.stars_5
+                      }}</span>
                     </div>
                   </div>
                 </div>
@@ -321,7 +329,9 @@
                   </div>
                   <div class="col-3 mx-auto">
                     <div>
-                      <span class="text-14">{{listHotel && listHotel.rating.stars_4}}</span>
+                      <span class="text-14">{{
+                        listHotel && listHotel.rating.stars_4
+                      }}</span>
                     </div>
                   </div>
                 </div>
@@ -343,7 +353,9 @@
                   </div>
                   <div class="col-3 mx-auto">
                     <div>
-                      <span class="text-14">{{listHotel && listHotel.rating.stars_3}}</span>
+                      <span class="text-14">{{
+                        listHotel && listHotel.rating.stars_3
+                      }}</span>
                     </div>
                   </div>
                 </div>
@@ -365,7 +377,9 @@
                   </div>
                   <div class="col-3 mx-auto">
                     <div>
-                      <span class="text-14">{{listHotel && listHotel.rating.stars_2}}</span>
+                      <span class="text-14">{{
+                        listHotel && listHotel.rating.stars_2
+                      }}</span>
                     </div>
                   </div>
                 </div>
@@ -387,7 +401,9 @@
                   </div>
                   <div class="col-3 mx-auto">
                     <div>
-                      <span class="text-14">{{listHotel && listHotel.rating.stars_1}}</span>
+                      <span class="text-14">{{
+                        listHotel && listHotel.rating.stars_1
+                      }}</span>
                     </div>
                   </div>
                 </div>
@@ -395,7 +411,13 @@
             </div>
           </div>
 
-          <div class="col-12 col-sm-12 col-md-11 col-lg-8 col-xl-8 mx-auto comment-box">
+          <div
+            class="
+              col-12 col-sm-12 col-md-11 col-lg-8 col-xl-8
+              mx-auto
+              comment-box
+            "
+          >
             <div class="card room-type-card px-4 py-4">
               <!-- user never write any comment or not yet log in-->
               <div class="row" v-if="!userRating">
@@ -437,7 +459,7 @@
                 </div>
                 <div class="col-11">
                   <textarea
-                    class="form-control"
+                    class="form-control comment-inputbox"
                     aria-label="Comment"
                     placeholder="Comment ..."
                     style="
@@ -456,8 +478,78 @@
                     >
                       Send
                     </button>
-                    <button class="btn ml-1 btn-sm comment-button">
+                    <!-- <button class="btn ml-1 btn-sm comment-button">
                       Clear
+                    </button> -->
+                  </div>
+                  <hr style="height: 2px" />
+                </div>
+              </div>
+
+              <div class="row" v-else-if="userRating && edite">
+                <div class="comment-top">
+                  <div class="profile">
+                    <div class="col-1">
+                      <img
+                        :src="user && user.photoURL"
+                        alt="..."
+                        class="rounded-circle"
+                        style="width: 55px"
+                      />
+                    </div>
+                    <div class="col-11 username">
+                      <div>{{ user && user.displayName }}</div>
+                      <!-- rating -->
+
+                      <div class="star-container">
+                        <a
+                          v-for="n in userRating.data.stars"
+                          :key="n"
+                          @click="hovorStar(n)"
+                          id="star"
+                        >
+                          <i class="bi bi-star-fill"></i>
+                        </a>
+                        <a
+                          v-for="n in 5 - userRating.data.stars"
+                          :key="n"
+                          @click="hovorStar(userRating.data.stars + n)"
+                          id="star"
+                        >
+                          <i class="bi bi-star"></i>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-11">
+                  <textarea
+                    class="form-control comment-inputbox"
+                    aria-label="Comment"
+                    placeholder="Comment ..."
+                    style="
+                      border-radius: 10px;
+                      color: white;
+                      background-color: #00adb5;
+                      border: none;
+                    "
+                    rows="3"
+                    v-model="comment"
+                  ></textarea>
+                  <div class="mt-3">
+                    <button
+                      class="btn btn-sm comment-button"
+                      @click="
+                        postEdit(user.uid,userRating.uid, userRating.data.stars)
+                      "
+                    >
+                      Edite
+                    </button>
+                    <button
+                      class="btn ml-1 btn-sm comment-button"
+                      @click="edite = false"
+                    >
+                      Cancel
                     </button>
                   </div>
                   <hr style="height: 2px" />
@@ -497,21 +589,29 @@
                           <i class="bi bi-star"></i>
                         </a>
                       </div>
+                      <p
+                        class="comment-text"
+                        v-if="userRating && userRating.data.comments"
+                      >
+                        <i>{{ userRating && userRating.data.comments }} </i>
+                      </p>
                     </div>
                   </div>
                 </div>
                 <div class="col-11">
-                  <p>
-                    <i>{{ userRating && userRating.data.comments }} </i>
-                  </p>
                   <div class="mt-3">
                     <button
                       class="btn btn-sm comment-button"
-                      @click="sendRating()"
+                      @click="enableEdite()"
                     >
                       Edite
                     </button>
-                    <button class="btn ml-1 btn-sm comment-button">
+                    <button
+                      class="btn ml-1 btn-sm comment-button"
+                      @click="
+                        deleteRating(userRating.uid, userRating.data.stars)
+                      "
+                    >
                       Delete
                     </button>
                   </div>
@@ -542,10 +642,10 @@
                       <i class="bi bi-star"></i>
                     </a>
                   </div>
+                  <p class="comment-text" v-if="rate && rate.data.comments">
+                    <i>{{ rate && rate.data.comments }} </i>
+                  </p>
                 </div>
-                <p>
-                  <i>{{ rate && rate.data.comments }} </i>
-                </p>
               </div>
               <!-- end comment -->
             </div>
@@ -565,6 +665,9 @@ import topbar from "./components/topbar.vue";
 import rating from "../firebase/rating";
 import userAuth from "../firebase/auth";
 import { auth } from "../firebase/config";
+import deleterating from "../firebase/deleteRating";
+import updatRating from "../firebase/updateRating";
+import listOnRating from "../firebase/listOneRating";
 
 export default {
   name: "DetailPage",
@@ -584,11 +687,13 @@ export default {
     comment: null,
     rating: null,
     userRating: null,
-    stars_5 : null,
-    stars_4 : null,
-    stars_3 : null,
-    stars_2 : null,
-    stars_1 : null,
+    stars_5: null,
+    stars_4: null,
+    stars_3: null,
+    stars_2: null,
+    stars_1: null,
+    edite: false,
+    notchange:false
   }),
 
   created() {
@@ -605,20 +710,35 @@ export default {
   async mounted() {
     this.listHotel = await listOneHotelByID(this.router);
     this.rating = await listRating(this.listHotel.uid);
-    if(this.listHotel.rating.length!=0){
-      let total = this.listHotel.rating.rateNum
-      let rating = this.listHotel.rating
-      this.stars_5 = "width:"+(rating.stars_5 /total)*100+'%'
-      this.stars_4 = "width:"+(rating.stars_4 /total)*100+'%'
-      this.stars_3 = "width:"+(rating.stars_3 /total)*100+'%'
-      this.stars_2 = "width:"+(rating.stars_2 /total)*100+'%'
-      this.stars_1 = "width:"+(rating.stars_1 /total)*100+'%'
+    if (this.listHotel.rating.length != 0) {
+      let total = this.listHotel.rating.rateNum;
+      let rating = this.listHotel.rating;
+      this.stars_5 = "width:" + (rating.stars_5 / total) * 100 + "%";
+      this.stars_4 = "width:" + (rating.stars_4 / total) * 100 + "%";
+      this.stars_3 = "width:" + (rating.stars_3 / total) * 100 + "%";
+      this.stars_2 = "width:" + (rating.stars_2 / total) * 100 + "%";
+      this.stars_1 = "width:" + (rating.stars_1 / total) * 100 + "%";
     }
   },
   watch: {
-    user() {
-      if (this.user != null) {
-        let data = userRate(this.user.uid, this.rating);
+    listHotel: {
+      handler() {
+        if (this.listHotel.rating.length != 0) {
+          let total = this.listHotel.rating.rateNum;
+          let rating = this.listHotel.rating;
+          this.stars_5 = "width:" + (rating.stars_5 / total) * 100 + "%";
+          this.stars_4 = "width:" + (rating.stars_4 / total) * 100 + "%";
+          this.stars_3 = "width:" + (rating.stars_3 / total) * 100 + "%";
+          this.stars_2 = "width:" + (rating.stars_2 / total) * 100 + "%";
+          this.stars_1 = "width:" + (rating.stars_1 / total) * 100 + "%";
+        }
+      },
+      deep: true,
+    },
+    async user() {
+      if (this.user != null && !this.notchange) {
+        console.log('get call')
+        let data = await userRate(this.user.uid, this.rating);
         this.userRating = data.userRate;
         this.rating = data.rating;
       }
@@ -626,27 +746,49 @@ export default {
   },
   methods: {
     async sendRating() {
-      let user_id;
       if (this.user == null) {
         this.isLogin = await userAuth("login");
+        this.notchange = true
         this.user = auth.currentUser;
       }
-      user_id = this.user.uid;
-      let data = await rating(
-        parseInt(this.rate),
-        this.listHotel.uid,
-        user_id,
-        this.comment,
-        this.user.photoURL,
-        this.user.displayName
-      );
-      console.log(data);
+      
+      let check = await listOnRating(this.listHotel.uid, auth.currentUser.uid);
+      
+      let data;
+      if (check.length == 0) {
+        data = await rating(
+          parseInt(this.rate),
+          this.listHotel.uid,
+          this.user.id,
+          this.comment,
+          this.user.photoURL,
+          this.user.displayName
+        );
+      } else {
+        data = await updatRating(
+          this.user.uid,
+          check[0].uid,
+          parseInt(check[0].data.stars),
+          parseInt(this.rate),
+          this.comment,
+          this.listHotel
+        );
+      }
+
+      this.listHotel = data.hotel;
+      this.rating = data.rating;
+      this.userRating=  data.userRating
     },
     getUser(value) {
       this.user = value;
     },
-    removeUser() {
+    async removeUser() {
       this.user = null;
+      this.comment = null;
+      this.rating = null;
+      this.userRating = null;
+      this.edite = false;
+      this.rating = await listRating(this.listHotel.uid);
     },
     hovorStar(num) {
       const stars = document.querySelectorAll("#star");
@@ -659,6 +801,38 @@ export default {
         stars[i].firstElementChild.classList.remove("bi-star");
       }
       this.rate = num;
+    },
+    async deleteRating(uid, stars) {
+      let checking = confirm("Are you sure u want to delete ur review ?");
+      if (checking) {
+        let data = await deleterating(uid, this.listHotel, stars);
+        this.listHotel = data.hotel;
+        this.rating = data.rating;
+        this.userRating = null;
+        this.comment = null;
+        alert("succesfully delete");
+      } else if (!checking) {
+        alert("cancel delete");
+      }
+    },
+    enableEdite() {
+      this.edite = true;
+      this.comment = this.userRating.data.comments;
+      this.hovorStar(this.userRating.data.stars);
+    },
+    async postEdit(user_id,rating_id, oldRate) {
+      let data = await updatRating(
+        user_id,
+        rating_id,
+        oldRate,
+        parseInt(this.rate),
+        this.comment,
+        this.listHotel
+      );
+      this.listHotel = data.hotel;
+      this.rating = data.rating;
+      this.userRating = data.userRating
+      this.edite = false
     },
   },
 };
@@ -738,7 +912,18 @@ export default {
   font-weight: bold;
   font-style: italic;
 }
-.comment-box{
+.comment-box {
+  margin-top: 10px;
+}
+.comment-inputbox {
+  font-size: 15px;
+}
+.comment-text {
+  background-color: rgb(0, 173, 181);
+  font-size: 15px;
+  border-radius: 10px;
+  padding: 10px;
+  width: 90%;
   margin-top: 10px;
 }
 </style>
