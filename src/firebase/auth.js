@@ -14,18 +14,15 @@ export default async function userAuth(type,data) {
     else if(type=='loginAdmin'){
         try {
             let userAdmin = await signInWithEmailAndPassword(auth,data.email,data.password)
-            localStorage.setItem('userAdmin',userAdmin)
+            let user = JSON.stringify(auth.currentUser)
+            console.log(user)
+            localStorage.setItem('userAdmin',user)
             if(userAdmin.user){
                 return true
             }
         } catch (error) {
-            return 'hi'
+            return false
         }
-        // if(data.email=="admin@admin.com"){
-        //     if(data.password=="admin12345"){
-        //         return true
-        //     }
-        // }
     }
     else if(type=='signout'){
         localStorage.removeItem('userAdmin')

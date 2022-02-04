@@ -63,7 +63,7 @@
               <div class="col-12 col-sm-12 col-md-9 col-lg-9 col-xl-9">
                 <img
                   :src="listHotel && listHotel.images[0]"
-                  class="mainimage"
+                  class="mainimage "
                   alt=""
                 />
               </div>
@@ -71,21 +71,21 @@
                 <div class="my-1">
                   <img
                     :src="listHotel && listHotel.images[1]"
-                    style="width: 100%; height: 100%; padding: 0"
+                    style="width: 100%; height: 150px; padding: 0"
                     alt=""
                   />
                 </div>
                 <div class="my-1">
                   <img
                     :src="listHotel && listHotel.images[2]"
-                    style="width: 100%; height: 100%; padding: 0"
+                    style="width: 100%; height: 150px; padding: 0"
                     alt=""
                   />
                 </div>
                 <div class="my-1">
                   <img
                     :src="listHotel && listHotel.images[3]"
-                    style="width: 100%; height: 100%; padding: 0"
+                    style="width: 100%; height: 150px; padding: 0"
                     alt=""
                   />
                 </div>
@@ -281,7 +281,10 @@
             <div class="card room-type-card px-4 py-4">
               <div class="text-left">
                 <span class="text-24">
-                  {{ listHotel && listHotel.rating.rateNum }} Rates
+                  {{
+                    listHotel && listHotel.rating && listHotel.rating.rateNum
+                  }}
+                  Rates
                 </span>
               </div>
               <hr style="height: 2px" />
@@ -297,16 +300,16 @@
                         class="progress-bar"
                         role="progressbar"
                         :style="stars_5"
-                        :aria-valuenow="listHotel && listHotel.rating.stars_5"
+                        aria-valuenow="25"
                         aria-valuemin="0"
-                        :aria-valuemax="listHotel && listHotel.rating.rateNum"
+                        aria-valuemax="100"
                       ></div>
                     </div>
                   </div>
                   <div class="col-3 mx-auto">
                     <div>
                       <span class="text-14">{{
-                        listHotel && listHotel.rating.stars_5
+                        listHotel && listHotel.rating && listHotel.rating.stars_5
                       }}</span>
                     </div>
                   </div>
@@ -321,16 +324,16 @@
                         class="progress-bar"
                         role="progressbar"
                         :style="stars_4"
-                        :aria-valuenow="listHotel && listHotel.rating.stars_4"
+                        aria-valuenow="25"
                         aria-valuemin="0"
-                        :aria-valuemax="listHotel && listHotel.rating.rateNum"
+                        aria-valuemax="100"
                       ></div>
                     </div>
                   </div>
                   <div class="col-3 mx-auto">
                     <div>
                       <span class="text-14">{{
-                        listHotel && listHotel.rating.stars_4
+                        listHotel && listHotel.rating && listHotel.rating.stars_4
                       }}</span>
                     </div>
                   </div>
@@ -345,16 +348,16 @@
                         class="progress-bar"
                         role="progressbar"
                         :style="stars_3"
-                        :aria-valuenow="listHotel && listHotel.rating.stars_3"
+                        aria-valuenow="25"
                         aria-valuemin="0"
-                        :aria-valuemax="listHotel && listHotel.rating.rateNum"
+                        aria-valuemax="100"
                       ></div>
                     </div>
                   </div>
                   <div class="col-3 mx-auto">
                     <div>
                       <span class="text-14">{{
-                        listHotel && listHotel.rating.stars_3
+                        listHotel && listHotel.rating && listHotel.rating.stars_3
                       }}</span>
                     </div>
                   </div>
@@ -378,7 +381,7 @@
                   <div class="col-3 mx-auto">
                     <div>
                       <span class="text-14">{{
-                        listHotel && listHotel.rating.stars_2
+                        listHotel && listHotel.rating && listHotel.rating.stars_2
                       }}</span>
                     </div>
                   </div>
@@ -402,7 +405,7 @@
                   <div class="col-3 mx-auto">
                     <div>
                       <span class="text-14">{{
-                        listHotel && listHotel.rating.stars_1
+                        listHotel && listHotel.rating && listHotel.rating.stars_1
                       }}</span>
                     </div>
                   </div>
@@ -540,7 +543,11 @@
                     <button
                       class="btn btn-sm comment-button"
                       @click="
-                        postEdit(user.uid,userRating.uid, userRating.data.stars)
+                        postEdit(
+                          user.uid,
+                          userRating.uid,
+                          userRating.data.stars
+                        )
                       "
                     >
                       Edite
@@ -687,13 +694,13 @@ export default {
     comment: null,
     rating: null,
     userRating: null,
-    stars_5: null,
-    stars_4: null,
-    stars_3: null,
-    stars_2: null,
-    stars_1: null,
+    stars_5: "",
+    stars_4: "",
+    stars_3: "",
+    stars_2: "",
+    stars_1: "",
     edite: false,
-    notchange:false
+    notchange: false,
   }),
 
   created() {
@@ -710,34 +717,38 @@ export default {
   async mounted() {
     this.listHotel = await listOneHotelByID(this.router);
     this.rating = await listRating(this.listHotel.uid);
-    if (this.listHotel.rating.length != 0) {
-      let total = this.listHotel.rating.rateNum;
-      let rating = this.listHotel.rating;
-      this.stars_5 = "width:" + (rating.stars_5 / total) * 100 + "%";
-      this.stars_4 = "width:" + (rating.stars_4 / total) * 100 + "%";
-      this.stars_3 = "width:" + (rating.stars_3 / total) * 100 + "%";
-      this.stars_2 = "width:" + (rating.stars_2 / total) * 100 + "%";
-      this.stars_1 = "width:" + (rating.stars_1 / total) * 100 + "%";
+    if (this.listHotel.rating) {
+      if (this.listHotel.rating.length != 0) {
+        let total = this.listHotel.rating.rateNum;
+        let rating = this.listHotel.rating;
+        this.stars_5 = "width:" + (rating.stars_5 / total) * 100 + "%";
+        this.stars_4 = "width:" + (rating.stars_4 / total) * 100 + "%";
+        this.stars_3 = "width:" + (rating.stars_3 / total) * 100 + "%";
+        this.stars_2 = "width:" + (rating.stars_2 / total) * 100 + "%";
+        this.stars_1 = "width:" + (rating.stars_1 / total) * 100 + "%";
+      }
     }
   },
   watch: {
     listHotel: {
       handler() {
-        if (this.listHotel.rating.length != 0) {
-          let total = this.listHotel.rating.rateNum;
-          let rating = this.listHotel.rating;
-          this.stars_5 = "width:" + (rating.stars_5 / total) * 100 + "%";
-          this.stars_4 = "width:" + (rating.stars_4 / total) * 100 + "%";
-          this.stars_3 = "width:" + (rating.stars_3 / total) * 100 + "%";
-          this.stars_2 = "width:" + (rating.stars_2 / total) * 100 + "%";
-          this.stars_1 = "width:" + (rating.stars_1 / total) * 100 + "%";
+        if (this.listHotel.rating) {
+          if (this.listHotel.rating.length != 0) {
+            let total = this.listHotel.rating.rateNum;
+            let rating = this.listHotel.rating;
+            this.stars_5 = "width:" + (rating.stars_5 / total) * 100 + "%";
+            this.stars_4 = "width:" + (rating.stars_4 / total) * 100 + "%";
+            this.stars_3 = "width:" + (rating.stars_3 / total) * 100 + "%";
+            this.stars_2 = "width:" + (rating.stars_2 / total) * 100 + "%";
+            this.stars_1 = "width:" + (rating.stars_1 / total) * 100 + "%";
+          }
         }
       },
       deep: true,
     },
     async user() {
       if (this.user != null && !this.notchange) {
-        console.log('get call')
+        console.log("get call");
         let data = await userRate(this.user.uid, this.rating);
         this.userRating = data.userRate;
         this.rating = data.rating;
@@ -748,18 +759,18 @@ export default {
     async sendRating() {
       if (this.user == null) {
         this.isLogin = await userAuth("login");
-        this.notchange = true
+        this.notchange = true;
         this.user = auth.currentUser;
       }
-      
+
       let check = await listOnRating(this.listHotel.uid, auth.currentUser.uid);
-      
+
       let data;
       if (check.length == 0) {
         data = await rating(
           parseInt(this.rate),
           this.listHotel.uid,
-          this.user.id,
+          this.user.uid,
           this.comment,
           this.user.photoURL,
           this.user.displayName
@@ -777,7 +788,7 @@ export default {
 
       this.listHotel = data.hotel;
       this.rating = data.rating;
-      this.userRating=  data.userRating
+      this.userRating = data.userRating;
     },
     getUser(value) {
       this.user = value;
@@ -820,7 +831,7 @@ export default {
       this.comment = this.userRating.data.comments;
       this.hovorStar(this.userRating.data.stars);
     },
-    async postEdit(user_id,rating_id, oldRate) {
+    async postEdit(user_id, rating_id, oldRate) {
       let data = await updatRating(
         user_id,
         rating_id,
@@ -831,8 +842,8 @@ export default {
       );
       this.listHotel = data.hotel;
       this.rating = data.rating;
-      this.userRating = data.userRating
-      this.edite = false
+      this.userRating = data.userRating;
+      this.edite = false;
     },
   },
 };
@@ -874,7 +885,7 @@ export default {
 }
 .mainimage {
   width: 100%;
-  height: 400px;
+  height: 450px;
 }
 
 .comment-top {

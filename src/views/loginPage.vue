@@ -62,10 +62,11 @@ export default {
     async logIn(){
       let isLogin = await userAuth('loginAdmin',this.form)
       if(isLogin){
+        alert('login successfully')
         this.$router.push('/admin/admin-panel')
       }
       else{
-        console.log(isLogin);
+        alert('login fail, wrong password or user not exist')
       }
     }
   }
